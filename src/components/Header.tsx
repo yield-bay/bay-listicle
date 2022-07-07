@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Header() {
   const { theme, setTheme } = useTheme();
   return (
-    <div className="w-full flex items-center p-2 pl-6 md:pl-12 shadow-md z-10 bg-primary-500 dark:bg-primary-800 dark:bg-opacity-60 font-medium text-sm md:text-base text-white">
+    <div className="w-full flex items-center p-2 pl-6 md:pl-12 z-10 bg-primary-500 dark:bg-primary-800 dark:bg-opacity-60 font-medium text-sm md:text-base text-white">
       <button
         className="flex p-2 bg-white dark:bg-neutral-900 transition-all duration-200 border border-neutral-200 dark:border-neutral-700 rounded-lg hover:shadow-md cursor-pointer ml-auto"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
