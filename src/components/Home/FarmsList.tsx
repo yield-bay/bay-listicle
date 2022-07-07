@@ -1,41 +1,57 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
 import toDollarFormat from "@utils/toDollarFormat";
 
 const FarmsList = ({ farms }: any) => {
-  const router = useRouter();
+  function formatFarmType(farmType: string): string {
+    let formatted = farmType.slice(0, -4); // removed _AMM
+    // formatted = formatted.slice(0, 1) + formatted.slice(1).toLowerCase();
+    return formatted.concat(" SWAP"); // added "Swap"
+  }
 
-  console.log("farms", farms);
+  function formatChain(chainName: string): string {
+    let formatted = chainName.slice(0, 1) + chainName.slice(1).toLowerCase();
+    return formatted;
+  }
+
   return (
     <>
       {farms.map((farm: any) => (
         <tr key={farm.id}>
           <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
             <div className="flex items-center">
-              <div className="relative z-0 flex -space-x-2 overflow-hidden p-0.5">
-                <img
-                  className="relative z-10 inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-neutral-500"
-                  src={farm?.asset?.tokens[0]?.logo}
-                  alt=""
-                />
-                <img
-                  className="relative z-20 inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-neutral-500"
-                  src={farm?.asset?.tokens[1]?.logo}
-                  alt=""
-                />
+              <div className="flex md:hidden lg:flex flex-row items-center justify-center -space-x-2">
+                <div className="z-0 flex overflow-hidden ring-2 ring-neutral-300 dark:ring-neutral-500 rounded-full bg-white dark:bg-neutral-800">
+                  <Image
+                    src={farm?.asset?.tokens[0]?.logo}
+                    alt={farm?.asset?.tokens[0]?.symbol}
+                    width={36}
+                    height={36}
+                  />
+                </div>
+                <div className="z-10 flex overflow-hidden ring-2 ring-neutral-300 dark:ring-neutral-500 rounded-full bg-white dark:bg-neutral-800">
+                  <Image
+                    src={farm?.asset?.tokens[1]?.logo}
+                    alt={farm?.asset?.tokens[1]?.symbol}
+                    width={36}
+                    height={36}
+                  />
+                </div>
               </div>
-              <div className="ml-2">
-                <div className="flex">
+              <div className="ml-2 flex flex-col gap-y-0.5">
+                <div className="flex flex-row items-center">
                   <div className="font-medium">
-                    {farm?.asset?.tokens[0]?.name} •{" "}
-                    {farm?.asset?.tokens[1]?.name}
+                    <span>{farm?.asset?.tokens[0]?.name}</span>
+                    {" • "}
+                    <span>{farm?.asset?.tokens[1]?.name}</span>
                   </div>
-                  <span className="ml-2.5 inline-flex items-center rounded bg-primary-100 dark:bg-primary-500 px-1.5 text-xs font-medium text-primary-800 dark:text-primary-900">
-                    {farm?.farmType}
-                  </span>
+                  <div className="ml-2">
+                    <span className="tracking-wider items-center rounded bg-indigo-50 dark:bg-indigo-300 px-2 py-0.5 text-xs font-semibold text-indigo-500 dark:text-neutral-900">
+                      {formatFarmType(farm?.farmType)}
+                    </span>
+                  </div>
                 </div>
                 <div className="text-neutral-500 dark:text-neutral-400">
-                  {farm?.protocol} on {farm?.chin}
+                  {farm?.protocol} on {formatChain(farm?.chain)}
                 </div>
               </div>
             </div>
@@ -50,13 +66,7 @@ const FarmsList = ({ farms }: any) => {
           </td>
           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
             <a href={farm?.url} target="_blank">
-              <button
-                // onClick={(e) => {
-                //   e.preventDefault();
-                //   router.push(farm?.url);
-                // }}
-                className="inline-flex items-center duration-50 rounded-lg bg-primary-500 dark:bg-primary-500 px-5 py-2 transition-all duration-100 hover:shadow-lg font-medium text-white dark:text-neutral-800 active:bg-primary-600 hover:ring-2 ring-primary-700 dark:hover:bg-primary-400 dark:active:bg-primary-500"
-              >
+              <button className="inline-flex items-center duration-50 rounded bg-indigo-50 dark:bg-indigo-300 px-5 py-2 transition-all duration-100 hover:shadow-lg font-semibold text-indigo-500 dark:text-indigo-800 active:bg-indigo-200 hover:ring-2 ring-indigo-400 dark:hover:bg-indigo-200 dark:active:bg-indigo-300">
                 <p>Go to farm</p>
               </button>
             </a>
