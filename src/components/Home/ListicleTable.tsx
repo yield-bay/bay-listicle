@@ -29,7 +29,7 @@ const ListicleTable = () => {
                   >
                     <div className="flex">
                       <span>TVL</span>
-                      <QuestionMarkCircleIcon className="w-4 h-5 ml-1 text-gray-500 dark:text-gray-400" />
+                      <QuestionMarkCircleIcon className="w-4 h-5 ml-1 text-neutral-500 dark:text-neutral-400" />
                     </div>
                   </th>
                   <th
@@ -38,7 +38,7 @@ const ListicleTable = () => {
                   >
                     <div className="flex">
                       <span>Yield</span>
-                      <QuestionMarkCircleIcon className="w-4 h-5 ml-1 text-gray-500 dark:text-gray-400" />
+                      <QuestionMarkCircleIcon className="w-4 h-5 ml-1 text-neutral-500 dark:text-neutral-400" />
                     </div>
                   </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
