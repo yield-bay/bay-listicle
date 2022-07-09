@@ -1,14 +1,8 @@
-// import {
-//   ColumnDef,
-//   flexRender,
-//   getCoreRowModel,
-//   useReactTable,
-// } from "@tanstack/react-table";
-import FarmsList from "./FarmsList";
 import { QuestionMarkCircleIcon } from "@heroicons/react/outline";
+import FarmsList from "./FarmsList";
+import Tooltip from "@components/Tooltip";
 
 const ListicleTable = ({ farms }: any) => {
-  // POSSIBLY CAN ADD SORTING FUNCTION HERE
   return (
     <div className="flex flex-col">
       <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -27,18 +21,30 @@ const ListicleTable = ({ farms }: any) => {
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-medium tracking-wider"
                   >
-                    <div className="flex">
+                    <div className="flex items-center">
                       <span>TVL</span>
-                      <QuestionMarkCircleIcon className="w-4 h-5 ml-1 text-neutral-500 dark:text-neutral-400" />
+                      <Tooltip
+                        tooltipText={
+                          "Total Value Locked. Amount of money currently invested in the farm, denoted in USD."
+                        }
+                      >
+                        <QuestionMarkCircleIcon className="w-4 h-5 ml-1 text-neutral-500 dark:text-neutral-400" />
+                      </Tooltip>
                     </div>
                   </th>
                   <th
                     scope="col"
                     className="flex px-3 py-3.5 text-left text-sm font-medium tracking-wider"
                   >
-                    <div className="flex">
+                    <div className="flex items-center">
                       <span>Yield</span>
-                      <QuestionMarkCircleIcon className="w-4 h-4 ml-1 text-neutral-500 dark:text-neutral-400" />
+                      <Tooltip
+                        tooltipText={
+                          "The percentage of returns the farm offers on staking for an year."
+                        }
+                      >
+                        <QuestionMarkCircleIcon className="w-4 h-4 ml-1 text-neutral-500 dark:text-neutral-400" />
+                      </Tooltip>
                     </div>
                   </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
