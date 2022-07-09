@@ -3,14 +3,13 @@ import toDollarFormat from "@utils/toDollarFormat";
 
 const FarmsList = ({ farms }: any) => {
   function formatFarmType(farmType: string): string {
-    let formatted = farmType.slice(0, -4); // removed _AMM
+    let formatted = farmType.slice(0, -3).toUpperCase(); // removed Amm and uppercased
     // formatted = formatted.slice(0, 1) + formatted.slice(1).toLowerCase();
-    return formatted.concat(" SWAP"); // added "Swap"
+    return formatted.concat(" SWAP");
   }
 
-  function formatChain(chainName: string): string {
-    let formatted = chainName.slice(0, 1) + chainName.slice(1).toLowerCase();
-    return formatted;
+  function formatFirstLetter(name: string): string {
+    return name.slice(0, 1).toUpperCase() + name.slice(1);
   }
 
   return (
@@ -46,12 +45,13 @@ const FarmsList = ({ farms }: any) => {
                   </div>
                   <div className="ml-2">
                     <span className="tracking-wider items-center rounded bg-primary-50 dark:bg-primary-300 px-2 py-0.5 text-xs font-semibold text-primary-500 dark:text-neutral-900">
-                      {formatFarmType(farm?.farmType)}
+                      {formatFarmType(farm?.farm_type)}
                     </span>
                   </div>
                 </div>
                 <div className="text-neutral-500 dark:text-neutral-400">
-                  {farm?.protocol} on {formatChain(farm?.chain)}
+                  {formatFirstLetter(farm?.protocol)} on{" "}
+                  {formatFirstLetter(farm?.chain)}
                 </div>
               </div>
             </div>
@@ -62,10 +62,10 @@ const FarmsList = ({ farms }: any) => {
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100">
-            {farm?.apr?.farm + farm?.apr?.trading}%
+            {(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}%
           </td>
           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-            <a href={farm?.url} target="_blank">
+            <a href="https://app.solarbeam.io/farm" target="_blank">
               <button className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-100 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300">
                 <p>Go to farm</p>
               </button>

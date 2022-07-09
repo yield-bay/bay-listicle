@@ -1,16 +1,16 @@
-// import { fetchListicleFarms } from "@utils/api";
+import { useState, useEffect } from "react";
 import Head from "next/head";
+import { fetchListicleFarms } from "@utils/api";
 import ListicleTable from "./ListicleTable";
 
 const Home = () => {
-  // const [farms, setFarms] = useState([]);
+  const [farms, setFarms] = useState([]);
 
-  // useEffect(() => {
-  //   fetchListicleFarms().then((res: any) => {
-  //     setFarms(res?.farms);
-  //     console.log('farms:', res);
-  //   });
-  // }, []);
+  useEffect(() => {
+    fetchListicleFarms().then((res: any) => {
+      setFarms(res?.farms);
+    });
+  }, []);
 
   return (
     <div>
@@ -36,7 +36,9 @@ const Home = () => {
               </div>
               {/* Listicle Table */}
               <div className="px-4 mx-auto max-w-6xl mt-6 sm:px-6 md:px-8">
-                <ListicleTable />
+                <ListicleTable 
+                  farms={farms}
+                />
               </div>
             </div>
           </div>

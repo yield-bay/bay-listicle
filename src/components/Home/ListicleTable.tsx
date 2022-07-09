@@ -4,11 +4,11 @@
 //   getCoreRowModel,
 //   useReactTable,
 // } from "@tanstack/react-table";
-import dummyData from "../../utils/dummy.json";
 import FarmsList from "./FarmsList";
 import { QuestionMarkCircleIcon } from "@heroicons/react/outline";
 
-const ListicleTable = () => {
+const ListicleTable = ({ farms }: any) => {
+  // POSSIBLY CAN ADD SORTING FUNCTION HERE
   return (
     <div className="flex flex-col">
       <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -47,7 +47,7 @@ const ListicleTable = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-neutral-200 dark:divide-neutral-600 bg-white dark:bg-neutral-800">
-                <FarmsList farms={dummyData} />
+                <FarmsList farms={farms} />
               </tbody>
             </table>
           </div>
