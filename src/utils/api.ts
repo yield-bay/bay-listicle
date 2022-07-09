@@ -9,39 +9,39 @@ export const fetchListicleFarms = async () => {
   const farmObj = await client
     .query(
       gql`
-      query Farms {
-        farms {
-          chain
-          protocol
-          farm_type
-          farm_implementation
-          asset {
-            address
-            name
-            tokens {
-              symbol
-              price
-              logo
+        query Farms {
+          farms {
+            chain
+            protocol
+            farm_type
+            farm_implementation
+            asset {
+              address
+              name
+              tokens {
+                symbol
+                price
+                logo
+              }
             }
-          }
-          id
-          tvl
-          rewards {
-            token {
-              symbol
-              price
+            id
+            tvl
+            rewards {
+              token {
+                symbol
+                price
+              }
+              amount
+              value_usd
+              freq
             }
-            amount
-            value_usd
-            freq
+            apr {
+              farm
+              trading
+            }
+            url
           }
-          apr {
-            farm
-            trading
-          }
-          url
         }
-      }
       `
     )
     .toPromise();
