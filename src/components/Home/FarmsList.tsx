@@ -44,9 +44,9 @@ const FarmsList = ({ farms }: any) => {
                     <span>{farm?.asset?.tokens[1]?.symbol}</span>
                   </div>
                   <div className="ml-2">
-                    <span className="tracking-wider items-center rounded bg-primary-50 dark:bg-primary-300 px-2 py-0.5 text-xs font-semibold text-primary-500 dark:text-neutral-900">
+                    {/* <span className="tracking-wider items-center rounded bg-primary-50 dark:bg-primary-300 px-2 py-0.5 text-xs font-semibold text-primary-500 dark:text-neutral-900">
                       {formatFarmType(farm?.farm_type)}
-                    </span>
+                    </span> */}
                   </div>
                 </div>
                 <div className="text-neutral-500 dark:text-neutral-400 font-medium">
