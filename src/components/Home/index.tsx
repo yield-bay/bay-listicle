@@ -18,7 +18,7 @@ const Home = () => {
         <title>YieldBay Farms</title>
         <meta
           name="description"
-          content="YieldBay App list of liquidity farms"
+          content="YieldBay List | Discover Yield Farms in DotSama"
         />
       </Head>
 
@@ -36,9 +36,7 @@ const Home = () => {
               </div>
               {/* Listicle Table */}
               <div className="px-4 mx-auto max-w-6xl mt-6 sm:px-6 md:px-8">
-                <ListicleTable 
-                  farms={farms}
-                />
+                <ListicleTable farms={farms} />
               </div>
             </div>
           </div>

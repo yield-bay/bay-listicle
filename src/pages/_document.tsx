@@ -13,9 +13,9 @@ class MyDocument extends Document {
   }
 
   render() {
-    const title = "YieldBay Listicle";
-    const desc = "YieldBay is the yield aggregation hub of Dotsama ecosystem.";
-    const domain = "https://app.yieldbay.io/";
+    const title = "YieldBay List";
+    const desc = "Discover Yield Farms in DotSama";
+    const domain = "https://list.yieldbay.io/";
 
     return (
       <Html>
@@ -40,10 +40,6 @@ class MyDocument extends Document {
           <meta property="twitter:description" content={desc} />
           <meta property="twitter:image" content="/cover-image.png" />
 
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-            rel="stylesheet"
-          />
           <link rel="icon" href="/favicon/favicon.ico" />
           <link rel="manifest" href="/favicon/site.webmanifest" />
           <link
