@@ -19,13 +19,13 @@ const ListicleTable = ({ farms }: any) => {
                 <tr>
                   <th
                     scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6 tracking-wider"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-medium sm:pl-6 tracking-wider"
                   >
                     <span>Farm</span>
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold tracking-wider"
+                    className="px-3 py-3.5 text-left text-sm font-medium tracking-wider"
                   >
                     <div className="flex">
                       <span>TVL</span>
@@ -34,11 +34,11 @@ const ListicleTable = ({ farms }: any) => {
                   </th>
                   <th
                     scope="col"
-                    className="flex px-3 py-3.5 text-left text-sm font-semibold tracking-wider"
+                    className="flex px-3 py-3.5 text-left text-sm font-medium tracking-wider"
                   >
                     <div className="flex">
                       <span>Yield</span>
-                      <QuestionMarkCircleIcon className="w-4 h-5 ml-1 text-neutral-500 dark:text-neutral-400" />
+                      <QuestionMarkCircleIcon className="w-4 h-4 ml-1 text-neutral-500 dark:text-neutral-400" />
                     </div>
                   </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">

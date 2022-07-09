@@ -16,7 +16,7 @@ const FarmsList = ({ farms }: any) => {
     <>
       {farms.map((farm: any) => (
         <tr key={farm.id}>
-          <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+          <td className="whitespace-nowrap py-6 pl-4 pr-3 text-sm sm:pl-6">
             <div className="flex items-center">
               <div className="flex md:hidden lg:flex flex-row items-center justify-center -space-x-2">
                 <div className="z-0 flex overflow-hidden ring-2 ring-neutral-300 dark:ring-neutral-500 rounded-full bg-white dark:bg-neutral-800">
@@ -38,7 +38,7 @@ const FarmsList = ({ farms }: any) => {
               </div>
               <div className="ml-2 flex flex-col gap-y-0.5">
                 <div className="flex flex-row items-center">
-                  <div className="font-medium">
+                  <div className="font-semibold tracking-wide">
                     <span>{farm?.asset?.tokens[0]?.symbol}</span>
                     {" • "}
                     <span>{farm?.asset?.tokens[1]?.symbol}</span>
@@ -49,19 +49,17 @@ const FarmsList = ({ farms }: any) => {
                     </span>
                   </div>
                 </div>
-                <div className="text-neutral-500 dark:text-neutral-400">
+                <div className="text-neutral-500 dark:text-neutral-400 font-medium">
                   {formatFirstLetter(farm?.protocol)} on{" "}
                   {formatFirstLetter(farm?.chain)}
                 </div>
               </div>
             </div>
           </td>
-          <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-500">
-            <div className="text-neutral-900 dark:text-neutral-100">
-              {toDollarFormat(farm?.tvl)}
-            </div>
+          <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100 font-semibold">
+            {toDollarFormat(farm?.tvl)}
           </td>
-          <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100">
+          <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100 font-semibold">
             {(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}%
           </td>
           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
