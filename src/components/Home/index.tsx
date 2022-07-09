@@ -28,10 +28,20 @@ const Home = () => {
             <div className="py-16">
               <div className="px-4 mx-auto max-w-6xl sm:px-6 md:px-8 mb-4">
                 <h1 className="font-heading font-semibold text-2xl">
-                  List of Farms in Dotsama Ecosystem
+                  Yield Farms 🌾 from the Paraverse 🌌
                 </h1>
                 <p className="text-base font-normal text-neutral-600 dark:text-neutral-200 mt-0.5">
-                  Checkout all the available farms in dotsama ecosystem
+                  Discover yield opportunities across multiple protocols and{" "}
+                  <span className="font-semibold">
+                    Parachains on{" "}
+                    <span className="underline underline-offset-2 decoration-wavy decoration-pink-500">
+                      Polkadot
+                    </span>{" "}
+                    &amp;{" "}
+                    <span className="underline underline-offset-2 decoration-wavy decoration-cyan-500">
+                      Kusama
+                    </span>
+                  </span>
                 </p>
               </div>
               {/* Listicle Table */}
