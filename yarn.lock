@@ -2,6 +2,34 @@
 # yarn lockfile v1
 
 
+"@amplitude/analytics-browser@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@amplitude/analytics-browser/-/analytics-browser-1.0.0.tgz#60b228ae174b05e02581bb95851a5a4cc977f2ca"
+  integrity sha512-JzNXibg7dsRMIhwkrilLvplOLuQ2KGZpO3eMwm5qZB1dhMDHC1NpKRXa60+MOrZt4H6ACxD/gvuyBoXnbjgUyA==
+  dependencies:
+    "@amplitude/analytics-core" "^0.6.1"
+    "@amplitude/analytics-types" "^0.5.1"
+    "@amplitude/ua-parser-js" "^0.7.31"
+    tslib "^2.3.1"
+
+"@amplitude/analytics-core@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.npmjs.org/@amplitude/analytics-core/-/analytics-core-0.6.1.tgz#91a7430515f93789180c9f5ef4af173037c2f426"
+  integrity sha512-CpWQNejb7Kfnu6QYaZIeoU8xrGhUBVYtc243BH4LVi2pqiS4ATb/IkJfFdaerE8HEJyjXXzKGRnT6ouagZYmBA==
+  dependencies:
+    "@amplitude/analytics-types" "^0.5.1"
+    tslib "^2.3.1"
+
+"@amplitude/analytics-types@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.npmjs.org/@amplitude/analytics-types/-/analytics-types-0.5.1.tgz#6a25750c175bd86ccd8cb5e45a5b390bf9fd9ef1"
+  integrity sha512-/42ffX8qQbmxGTtBqmuHWKP/FkxrJ2/n9hBgikdrYd8T5Qg1IG9gfpP/Up7FNMV3md2sIaklpG7ou04C818rxg==
+
+"@amplitude/ua-parser-js@^0.7.31":
+  version "0.7.31"
+  resolved "https://registry.npmjs.org/@amplitude/ua-parser-js/-/ua-parser-js-0.7.31.tgz#749bf7cb633cfcc7ff3c10805bad7c5f6fbdbc61"
+  integrity sha512-+z8UGRaj13Pt5NDzOnkTBy49HE2CX64jeL0ArB86HAtilpnfkPB7oqkigN7Lf2LxscMg4QhFD7mmCfedh3rqTg==
+
 "@babel/runtime-corejs3@^7.10.2":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.18.6.tgz#6f02c5536911f4b445946a2179554b95c8838635"
@@ -2012,7 +2040,7 @@ tslib@^1.8.1:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.4.0:
+tslib@^2.3.1, tslib@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==

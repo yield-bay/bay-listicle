@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { fetchListicleFarms } from "@utils/api";
 import ListicleTable from "./ListicleTable";
+import * as amplitude from "@amplitude/analytics-browser";
 
 const Home = () => {
   const [farms, setFarms] = useState([]);
@@ -10,6 +11,8 @@ const Home = () => {
     fetchListicleFarms().then((res: any) => {
       setFarms(res?.farms);
     });
+
+    amplitude.track("page-view");
   }, []);
 
   return (
