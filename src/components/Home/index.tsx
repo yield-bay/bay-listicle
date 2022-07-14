@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { fetchListicleFarms } from "@utils/api";
 import ListicleTable from "./ListicleTable";
-
 import { trackPageView } from "@utils/analytics";
 
 const Home = () => {

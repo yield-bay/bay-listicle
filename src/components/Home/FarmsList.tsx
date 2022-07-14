@@ -1,14 +1,14 @@
 import Image from "next/image";
 import toDollarFormat from "@utils/toDollarFormat";
-import * as amplitude from "@amplitude/analytics-browser";
+// import * as amplitude from "@amplitude/analytics-browser";
 import { trackEventWithProperty } from "@utils/analytics";
 
 const FarmsList = ({ farms }: any) => {
-  function formatFarmType(farmType: string): string {
-    let formatted = farmType.slice(0, -3).toUpperCase(); // removed Amm and uppercased
-    // formatted = formatted.slice(0, 1) + formatted.slice(1).toLowerCase();
-    return formatted.concat(" SWAP");
-  }
+  // function formatFarmType(farmType: string): string {
+  //   let formatted = farmType.slice(0, -3).toUpperCase(); // removed Amm and uppercased
+  //   // formatted = formatted.slice(0, 1) + formatted.slice(1).toLowerCase();
+  //   return formatted.concat(" SWAP");
+  // }
 
   function formatFirstLetter(name: string): string {
     return name.slice(0, 1).toUpperCase() + name.slice(1);
@@ -71,7 +71,7 @@ const FarmsList = ({ farms }: any) => {
             {(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}%
           </td>
           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-            <a href={farmURL(farm?.protocol)} target="_blank">
+            <a href={farmURL(farm?.protocol)} target="_blank" rel="noreferrer">
               <button
                 className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-100 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300"
                 onClick={() =>
