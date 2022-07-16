@@ -21,7 +21,7 @@ export default function SearchInputGroup({ term, setTerm }: SearchInputProps) {
           value={term}
           onChange={(event) => setTerm(event.target.value)}
           className="block w-full pl-10 py-2 pr-3 font-normal text-gray-500 bg-gray-100 border-none outline-none dark:text-gray-400 sm:text-sm rounded-md dark:bg-gray-700"
-          placeholder="Search by Token, chain or protocol name"
+          placeholder="Search by token, chain or protocol name"
         />
       </div>
     </div>
