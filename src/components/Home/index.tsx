@@ -2,9 +2,11 @@ import { useState } from "react";
 import Head from "next/head";
 import ListicleTable from "./ListicleTable";
 import SearchInputGroup from "./SearchInputGroup";
+import useFilteredFarms from "@hooks/useFilteredFarms";
 
 const Home = ({ farms }: any) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredFarms, noFilteredFarms] = useFilteredFarms(farms, searchTerm);
 
   return (
     <div>
@@ -42,9 +44,13 @@ const Home = ({ farms }: any) => {
                 </div>
               </div>
               {/* Listicle Table */}
-              <div className="px-4 mx-auto max-w-6xl sm:px-6 md:px-8">
-                <ListicleTable farms={farms} />
-              </div>
+              {!noFilteredFarms ? (
+                <div className="px-4 mx-auto max-w-6xl sm:px-6 md:px-8">
+                  <ListicleTable farms={filteredFarms} />
+                </div>
+              ) : (
+                <p>Sorry, No Farms found.</p>
+              )}
             </div>
           </div>
         </div>
