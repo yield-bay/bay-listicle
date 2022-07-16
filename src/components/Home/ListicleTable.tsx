@@ -29,7 +29,7 @@ const ListicleTable = ({ farms }: any) => {
       key,
       order: sortStatus.order == Order.ASC ? Order.DESC : Order.ASC, // Flip the order
     };
-    if (key !== newSortStatus.key) newSortStatus.order = Order.DESC; // if the key is not same as before, set the Order to DESC
+    if (key !== sortStatus.key) newSortStatus.order = Order.DESC; // if the key is not same as before, set the Order to DESC
     setSortStatus(newSortStatus);
 
     let sortFn; // to be used to sort the pools
@@ -59,7 +59,7 @@ const ListicleTable = ({ farms }: any) => {
   return (
     <div className="flex flex-col">
       <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:p-8 dark:bg-neutral-900">
+        <div className="inline-block min-w-full align-middle md:px-0 lg:px-8 lg:py-4 dark:bg-neutral-900">
           <div className="overflow-hidden shadow ring-1 ring-black dark:ring-white ring-opacity-5 dark:ring-opacity-20 md:rounded-lg">
             <table className="min-w-full divide-y divide-neutral-300 dark:divide-neutral-600 text-neutral-900 dark:text-white">
               <thead className="bg-neutral-50 dark:bg-neutral-700">

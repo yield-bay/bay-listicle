@@ -1,7 +1,11 @@
+import { useState } from "react";
 import Head from "next/head";
 import ListicleTable from "./ListicleTable";
+import SearchInputGroup from "./SearchInputGroup";
 
 const Home = ({ farms }: any) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <div>
       <Head>
@@ -33,6 +37,9 @@ const Home = ({ farms }: any) => {
                     </span>
                   </span>
                 </p>
+                <div className="max-w-lg mt-8">
+                  <SearchInputGroup term={searchTerm} setTerm={setSearchTerm} />
+                </div>
               </div>
               {/* Listicle Table */}
               <div className="px-4 mx-auto max-w-6xl sm:px-6 md:px-8">
