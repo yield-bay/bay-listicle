@@ -44,13 +44,12 @@ const Home = ({ farms }: any) => {
                 </div>
               </div>
               {/* Listicle Table */}
-              {!noFilteredFarms ? (
-                <div className="px-4 mx-auto max-w-6xl sm:px-6 md:px-8">
-                  <ListicleTable farms={filteredFarms} />
-                </div>
-              ) : (
-                <p>Sorry, No Farms found.</p>
-              )}
+              <div className="px-4 mx-auto max-w-6xl sm:px-6 md:px-8">
+                <ListicleTable
+                  farms={filteredFarms}
+                  noResult={noFilteredFarms}
+                />
+              </div>
             </div>
           </div>
         </div>
