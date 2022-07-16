@@ -61,8 +61,8 @@ export default function Footer() {
               <h1 className="text-2xl font-bold">YieldBay</h1>
             </button>
             <div className="text-neutral-500 dark:text-neutral-100 text-base">
-              <p>Yield Farming hub for all dotsama farms.</p>
-              <p className="mt-1">
+              <p>Yield Farming hub for the Polkadot &amp; Kusama Parachains.</p>
+              <p className="mt-1.5">
                 Discover yield farms, deposit liquidity and earn rewards in the
                 interoperable, multi-chain paraverse of Polkadot and Kusama.
               </p>
