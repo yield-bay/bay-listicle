@@ -1,19 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Head from "next/head";
-import { fetchListicleFarms } from "@utils/api";
 import ListicleTable from "./ListicleTable";
-import { trackPageView } from "@utils/analytics";
+import SearchInputGroup from "./SearchInputGroup";
+import useFilteredFarms from "@hooks/useFilteredFarms";
 
-const Home = () => {
-  const [farms, setFarms] = useState([]);
-
-  useEffect(() => {
-    fetchListicleFarms().then((res: any) => {
-      setFarms(res?.farms);
-    });
-
-    trackPageView();
-  }, []);
+const Home = ({ farms }: any) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredFarms, noFilteredFarms] = useFilteredFarms(farms, searchTerm);
 
   return (
     <div>
@@ -46,10 +39,16 @@ const Home = () => {
                     </span>
                   </span>
                 </p>
+                <div className="max-w-lg mt-8">
+                  <SearchInputGroup term={searchTerm} setTerm={setSearchTerm} />
+                </div>
               </div>
               {/* Listicle Table */}
               <div className="px-4 mx-auto max-w-6xl sm:px-6 md:px-8">
-                <ListicleTable farms={farms} />
+                <ListicleTable
+                  farms={filteredFarms}
+                  noResult={noFilteredFarms}
+                />
               </div>
             </div>
           </div>

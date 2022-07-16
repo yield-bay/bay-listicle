@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
 
-const Tooltip = ({ children, tooltipText }: any) => {
+const Tooltip = ({ children, tooltipText, onButtonClick }: any) => {
   const [refElement, setRefElement] = useState<HTMLElement | null>(null);
   const [popperElement, setPopperElemenet] = useState<HTMLElement | null>(null);
   const [isShowingTip, setIsShowingTip] = useState(false);
@@ -17,6 +17,7 @@ const Tooltip = ({ children, tooltipText }: any) => {
         ref={setRefElement}
         onMouseEnter={() => setIsShowingTip(true)}
         onMouseLeave={() => setIsShowingTip(false)}
+        onClick={onButtonClick}
         // className="flex  items-center"
       >
         {children}

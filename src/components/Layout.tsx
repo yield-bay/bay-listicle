@@ -1,4 +1,5 @@
 import Header from "./Header";
+import Footer from "./Footer";
 
 const Layout = ({ children }: any) => {
   return (
@@ -6,6 +7,7 @@ const Layout = ({ children }: any) => {
       <div className="flex flex-col flex-1">
         <Header />
         <div>{children}</div>
+        <Footer />
       </div>
     </div>
   );
