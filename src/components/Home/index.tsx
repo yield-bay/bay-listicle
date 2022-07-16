@@ -1,20 +1,7 @@
-import { useState, useEffect } from "react";
 import Head from "next/head";
-import { fetchListicleFarms } from "@utils/api";
 import ListicleTable from "./ListicleTable";
-import { trackPageView } from "@utils/analytics";
 
-const Home = () => {
-  const [farms, setFarms] = useState([]);
-
-  useEffect(() => {
-    fetchListicleFarms().then((res: any) => {
-      setFarms(res?.farms);
-    });
-
-    trackPageView();
-  }, []);
-
+const Home = ({ farms }: any) => {
   return (
     <div>
       <Head>
