@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import ListicleTable from "./ListicleTable";
 import SearchInputGroup from "./SearchInputGroup";
 import useFilteredFarms from "@hooks/useFilteredFarms";
+import { fetchListicleFarms } from "@utils/api";
+import { trackPageView } from "@utils/analytics";
 
-const Home = ({ farms }: any) => {
+const Home = () => {
+  const [farms, setFarms] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredFarms, noFilteredFarms] = useFilteredFarms(farms, searchTerm);
+
+  useEffect(() => {
+    fetchListicleFarms().then((res: any) => {
+      setFarms(res?.farms);
+    });
+
+    trackPageView();
+  });
 
   return (
     <div>
