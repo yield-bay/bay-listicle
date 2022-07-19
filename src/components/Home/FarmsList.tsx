@@ -15,8 +15,12 @@ const FarmsList = ({ farms }: any) => {
   }
 
   function farmURL(protocol: string): string {
-    if (protocol == "stellaswap") return "https://app.stellaswap.com/farm";
-    if (protocol == "solarbeam") return "https://app.solarbeam.io/farm";
+    if (protocol == "stellaswap")
+      return "https://app.stellaswap.com/farm/?utm_campaign=yieldbay+list&utm_source=list.yieldbay.io";
+    if (protocol == "solarbeam")
+      return "https://app.solarbeam.io/farm/?utm_campaign=yieldbay+list&utm_source=list.yieldbay.io";
+    if (protocol == "beamswap")
+      return "https://app.beamswap.io/farm/?utm_campaign=yieldbay+list&utm_source=list.yieldbay.io";
     return "";
   }
 
@@ -68,7 +72,7 @@ const FarmsList = ({ farms }: any) => {
             {toDollarFormat(farm?.tvl)}
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100 font-semibold">
-            {(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}%
+            {(farm?.apr?.base + farm?.apr?.reward).toFixed(2)}%
           </td>
           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
             <a href={farmURL(farm?.protocol)} target="_blank" rel="noreferrer">
