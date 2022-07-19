@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { useAtom } from "jotai";
+import { sortedFarmsAtom, sortStatusAtom } from "@store/atoms";
 import {
   ArrowNarrowDownIcon,
   ArrowNarrowUpIcon,
-  QuestionMarkCircleIcon,
 } from "@heroicons/react/outline";
 import FarmsList from "./FarmsList";
 import Tooltip from "@components/Tooltip";
@@ -13,16 +14,18 @@ enum Order {
 }
 
 const ListicleTable = ({ farms, noResult }: any) => {
-  const [sortStatus, setSortStatus] = useState({
-    key: "tvl",
-    order: Order.DESC,
-  });
+  // const [sortStatus, setSortStatus] = useState({
+  //   key: "tvl",
+  //   order: Order.DESC,
+  // });
+  // const [sortedFarms, setSortedFarms] = useState(farms);
 
-  const [sortedFarms, setSortedFarms] = useState(farms);
+  const [sortStatus, sortStatusSet] = useAtom(sortStatusAtom);
+  const [sortedFarms, sortedFarmsSet] = useAtom(sortedFarmsAtom);
 
   useEffect(() => {
-    if (farms.length > 0) setSortedFarms(farms);
-  }, [farms]);
+    if (farms.length > 0) sortedFarmsSet(farms);
+  }, [farms, sortedFarmsSet]);
 
   const handleSort = (key: string) => {
     let newSortStatus = {
@@ -30,7 +33,7 @@ const ListicleTable = ({ farms, noResult }: any) => {
       order: sortStatus.order == Order.ASC ? Order.DESC : Order.ASC, // Flip the order
     };
     if (key !== sortStatus.key) newSortStatus.order = Order.DESC; // if the key is not same as before, set the Order to DESC
-    setSortStatus(newSortStatus);
+    sortStatusSet(newSortStatus);
 
     let sortFn; // to be used to sort the pools
     if (newSortStatus.key == "tvl") {
@@ -53,7 +56,7 @@ const ListicleTable = ({ farms, noResult }: any) => {
           : -1;
     }
 
-    setSortedFarms([...farms].sort(sortFn));
+    sortedFarmsSet([...farms].sort(sortFn));
   };
 
   return (
