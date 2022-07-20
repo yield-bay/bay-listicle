@@ -135,7 +135,7 @@ const ListicleTable = ({ farms, noResult }: any) => {
             </div>
           ) : (
             <div className="px-6 py-10 text-center animate-pulse text-lg text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-600 sm:rounded-lg">
-              🌾 Harvesting Farms...
+              🌾 Finding Farms 🌾
             </div>
           )}
         </div>
