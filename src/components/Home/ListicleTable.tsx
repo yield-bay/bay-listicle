@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { useAtom } from "jotai";
+import { sortedFarmsAtom, sortStatusAtom } from "@store/atoms";
 import {
   ArrowNarrowDownIcon,
   ArrowNarrowUpIcon,
-  QuestionMarkCircleIcon,
 } from "@heroicons/react/outline";
 import FarmsList from "./FarmsList";
 import Tooltip from "@components/Tooltip";
@@ -13,16 +14,18 @@ enum Order {
 }
 
 const ListicleTable = ({ farms, noResult }: any) => {
-  const [sortStatus, setSortStatus] = useState({
-    key: "tvl",
-    order: Order.DESC,
-  });
+  // const [sortStatus, setSortStatus] = useState({
+  //   key: "tvl",
+  //   order: Order.DESC,
+  // });
+  // const [sortedFarms, setSortedFarms] = useState(farms);
 
-  const [sortedFarms, setSortedFarms] = useState(farms);
+  const [sortStatus, sortStatusSet] = useAtom(sortStatusAtom);
+  const [sortedFarms, sortedFarmsSet] = useAtom(sortedFarmsAtom);
 
   useEffect(() => {
-    if (farms.length > 0) setSortedFarms(farms);
-  }, [farms]);
+    if (farms.length > 0) sortedFarmsSet(farms);
+  }, [farms, sortedFarmsSet]);
 
   const handleSort = (key: string) => {
     let newSortStatus = {
@@ -30,7 +33,7 @@ const ListicleTable = ({ farms, noResult }: any) => {
       order: sortStatus.order == Order.ASC ? Order.DESC : Order.ASC, // Flip the order
     };
     if (key !== sortStatus.key) newSortStatus.order = Order.DESC; // if the key is not same as before, set the Order to DESC
-    setSortStatus(newSortStatus);
+    sortStatusSet(newSortStatus);
 
     let sortFn; // to be used to sort the pools
     if (newSortStatus.key == "tvl") {
@@ -53,14 +56,14 @@ const ListicleTable = ({ farms, noResult }: any) => {
           : -1;
     }
 
-    setSortedFarms([...farms].sort(sortFn));
+    sortedFarmsSet([...farms].sort(sortFn));
   };
 
   return (
     <div className="flex flex-col">
       <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full align-middle md:px-0 lg:px-8 lg:py-4 dark:bg-neutral-900">
-          {!noResult ? (
+          {farms.length > 0 ? (
             <div className="overflow-hidden shadow ring-1 ring-black dark:ring-white ring-opacity-5 dark:ring-opacity-20 md:rounded-lg">
               <table className="min-w-full divide-y divide-neutral-300 dark:divide-neutral-600 text-neutral-900 dark:text-white">
                 <thead className="bg-neutral-50 dark:bg-neutral-700">
@@ -126,9 +129,13 @@ const ListicleTable = ({ farms, noResult }: any) => {
                 </tbody>
               </table>
             </div>
-          ) : (
-            <div className="px-6 py-4 text-center border border-neutral-200 dark:border-neutral-600 sm:rounded-lg">
+          ) : noResult ? (
+            <div className="px-6 py-10 text-center border border-neutral-200 dark:border-neutral-600 sm:rounded-lg">
               Sorry, there is no farm available according to your preference 😔
+            </div>
+          ) : (
+            <div className="px-6 py-10 text-center animate-pulse text-lg text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-600 sm:rounded-lg">
+              🌾 Finding Farms 🌾
             </div>
           )}
         </div>
