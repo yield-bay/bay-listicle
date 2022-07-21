@@ -2,7 +2,19 @@ import { useState } from "react";
 import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
 
-const Tooltip = ({ children, tooltipText, onButtonClick }: any) => {
+type TooltipProps = {
+  children: React.ReactNode;
+  tooltipText: string;
+  onButtonClick: () => any;
+  className?: string;
+};
+
+const Tooltip = ({
+  children,
+  tooltipText,
+  onButtonClick,
+  className,
+}: TooltipProps) => {
   const [refElement, setRefElement] = useState<HTMLElement | null>(null);
   const [popperElement, setPopperElemenet] = useState<HTMLElement | null>(null);
   const [isShowingTip, setIsShowingTip] = useState(false);
@@ -31,7 +43,7 @@ const Tooltip = ({ children, tooltipText, onButtonClick }: any) => {
           {...attributes.popper}
           onMouseEnter={() => setIsShowingTip(true)}
           onMouseLeave={() => setIsShowingTip(false)}
-          className="border-2 bg-neutral-100 border-neutral-200 text-gray-800 text-sm shadow-md px-3 py-2 mb-2 max-w-[250px] text-center rounded-md dark:bg-neutral-800 dark:border-neutral-700 dark:text-white"
+          className={`border-2 bg-neutral-100 border-neutral-200 text-gray-800 text-sm shadow-md px-3 py-2 mb-2 max-w-[250px] text-center rounded-md dark:bg-neutral-800 dark:border-neutral-700 dark:text-white ${className}`}
         >
           <p>{tooltipText}</p>
         </Popover.Panel>
