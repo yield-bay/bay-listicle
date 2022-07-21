@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ShareIcon, ClipboardCopyIcon } from "@heroicons/react/outline";
+import { ShareIcon, ClipboardIcon } from "@heroicons/react/outline";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ShareMenu() {
+export default function ShareMenu({ farm }: any) {
   return (
     <Menu as="div" className="relative inline-block">
       <div className="hover:scale-105 active:scale-100">
@@ -24,20 +24,20 @@ export default function ShareMenu() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className=" border border-red-500 z-10 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
-          <div className="px-1 py-2">
+        <Menu.Items className="z-10 origin-top-left absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+          <div className="py-1">
             <Menu.Item>
               {({ active }: any) => (
                 <a
-                  href="#"
+                  href="https://twitter.com/share?text=Anakin%20Skywalker%20is%20not%20a%20Jedi%20Master&href=https://wookiepedia.com&hashtags=darthvader,jedi,sith"
                   className={classNames(
-                    active
-                      ? "bg-gray-100 text-gray-900 transition-all duration-100"
-                      : "text-gray-700",
-                    "group flex items-center px-4 py-2 rounded text-sm"
+                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                    "group flex items-center px-4 py-2 text-sm"
                   )}
+                  target="_blank"
+                  rel="noreferrer"
                 >
-                  <span className="sr-only">Twitter</span>
+                  <span className="sr-only">Share on Twitter</span>
                   <svg
                     className="h-5 w-5 mr-3"
                     fill="currentColor"
@@ -52,19 +52,16 @@ export default function ShareMenu() {
             </Menu.Item>
             <Menu.Item>
               {({ active }: any) => (
-                <a
-                  href="#"
+                <button
+                  onClick={() => navigator.clipboard.writeText("Link to Farm")}
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "group flex items-center px-4 py-2 text-sm rounded"
+                    "group flex items-center w-full px-4 py-2 text-sm"
                   )}
                 >
-                  <ClipboardCopyIcon
-                    className="mr-3 h-5 w-5"
-                    aria-hidden="true"
-                  />
-                  Share link
-                </a>
+                  <ClipboardIcon className="mr-3 h-5 w-5" aria-hidden="true" />
+                  Copy link
+                </button>
               )}
             </Menu.Item>
           </div>

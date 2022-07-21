@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import toDollarFormat from "@utils/toDollarFormat";
 // import * as amplitude from "@amplitude/analytics-browser";
 import { trackEventWithProperty } from "@utils/analytics";
-import ShareModal from "./ShareModal";
 import ShareMenu from "./ShareMenu";
 
 const FarmsList = ({ farms }: any) => {
@@ -12,8 +11,6 @@ const FarmsList = ({ farms }: any) => {
   //   // formatted = formatted.slice(0, 1) + formatted.slice(1).toLowerCase();
   //   return formatted.concat(" SWAP");
   // }
-
-  const [shareModalOpen, setShareModalOpen] = useState(false);
 
   function formatFirstLetter(name: string): string {
     return name.slice(0, 1).toUpperCase() + name.slice(1);
@@ -27,7 +24,6 @@ const FarmsList = ({ farms }: any) => {
 
   return (
     <>
-      <ShareModal open={shareModalOpen} setOpen={setShareModalOpen} />
       {farms.map((farm: any) => (
         <tr key={`${farm.asset.address}-${farm.tvl}`} className="group">
           <td className="whitespace-nowrap py-6 pl-4 pr-3 text-sm sm:pl-6">
@@ -79,19 +75,8 @@ const FarmsList = ({ farms }: any) => {
           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
             <div className="flex justify-center">
               {/* Share Icon */}
-              {/* <div className="absolute right-4">
-                <Tooltip
-                  tooltipText="Share farm"
-                  onButtonClick={() => setShareModalOpen(true)}
-                >
-                  <div className=" p-2 rounded-full scale-0 group-hover:scale-100 bg-neutral-100 dark:bg-neutral-700 cursor-pointer text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white active:bg-neutral-200 dark:active:bg-neutral-600 transition-all duration-150">
-                    <ShareIcon className="w-[18px]" />
-                  </div>
-                </Tooltip>
-              </div> */}
-              {/* SHARE ICON 2 */}
               <div className="absolute left-0 hidden md:block">
-                <ShareMenu />
+                <ShareMenu farm={farm} />
               </div>
               <a
                 href={farmURL(farm?.protocol)}
