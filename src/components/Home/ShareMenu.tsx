@@ -1,12 +1,16 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ShareIcon, ClipboardIcon } from "@heroicons/react/outline";
+import { useAtom } from "jotai";
+import { isNotificationAtom } from "@store/atoms";
 
-function classNames(...classes: string[]) {
+function classNames(classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function ShareMenu({ farm }: any) {
+  const [, isNotificationSet] = useAtom(isNotificationAtom);
+
   return (
     <Menu as="div" className="relative inline-block">
       <div className="hover:scale-105 active:scale-100">
@@ -24,16 +28,18 @@ export default function ShareMenu({ farm }: any) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="z-10 origin-top-left absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
-          <div className="py-1">
+        <Menu.Items className="z-10 origin-top-left absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-neutral-700 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+          <div className="py-1.5">
             <Menu.Item>
               {({ active }: any) => (
                 <a
                   href="https://twitter.com/share?text=Anakin%20Skywalker%20is%20not%20a%20Jedi%20Master&href=https://wookiepedia.com&hashtags=darthvader,jedi,sith"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "group flex items-center px-4 py-2 text-sm"
-                  )}
+                  className={classNames([
+                    active
+                      ? "bg-blue-400 text-white"
+                      : "text-gray-700 dark:text-neutral-100",
+                    "group flex items-center px-4 py-2 text-sm",
+                  ])}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -53,11 +59,19 @@ export default function ShareMenu({ farm }: any) {
             <Menu.Item>
               {({ active }: any) => (
                 <button
-                  onClick={() => navigator.clipboard.writeText("Link to Farm")}
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "group flex items-center w-full px-4 py-2 text-sm"
-                  )}
+                  onClick={() => {
+                    navigator.clipboard.writeText("Link to Farm");
+                    isNotificationSet(true);
+                    setTimeout(() => {
+                      isNotificationSet(false);
+                    }, 2000);
+                  }}
+                  className={classNames([
+                    active
+                      ? "bg-neutral-100 dark:bg-neutral-600 text-neutral-900 dark:text-white"
+                      : "text-gray-700 dark:text-neutral-100",
+                    "group flex items-center px-4 py-2 text-sm w-full",
+                  ])}
                 >
                   <ClipboardIcon className="mr-3 h-5 w-5" aria-hidden="true" />
                   Copy link

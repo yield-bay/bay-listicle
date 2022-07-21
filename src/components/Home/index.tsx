@@ -5,6 +5,7 @@ import SearchInputGroup from "./SearchInputGroup";
 import useFilteredFarms from "@hooks/useFilteredFarms";
 import { fetchListicleFarms } from "@utils/api";
 import { trackPageView } from "@utils/analytics";
+import Notification from "@components/common/Notification";
 
 const Home = () => {
   const [farms, setFarms] = useState([]);
@@ -65,6 +66,7 @@ const Home = () => {
           </div>
         </div>
       </main>
+      <Notification />
     </div>
   );
 };

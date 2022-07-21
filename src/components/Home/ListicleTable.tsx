@@ -6,7 +6,7 @@ import {
   ArrowNarrowUpIcon,
 } from "@heroicons/react/outline";
 import FarmsList from "./FarmsList";
-import Tooltip from "@components/Tooltip";
+import Tooltip from "@components/common/Tooltip";
 
 enum Order {
   ASC,
