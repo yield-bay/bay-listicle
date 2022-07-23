@@ -12,7 +12,9 @@ function classNames(classes: string[]) {
 export default function ShareMenu({ farm }: any) {
   const [, isNotificationSet] = useAtom(isNotificationAtom);
   let [url, setUrl] = useState<string>("");
-  const toastDuration = 2000;
+  const tweetUrl =
+    `https://twitter.com/share?text=This%20farm%20is%20a%20fabulous%20opportunity,%20must%20check%20it%20out&url=` +
+    url;
   useEffect(() => {
     setUrl(`http://localhost:3000?farm=${farm?.asset?.address}&id=${farm?.id}`);
   }, [farm]);
@@ -21,7 +23,7 @@ export default function ShareMenu({ farm }: any) {
     <Menu as="div" className="relative inline-block">
       <Tooltip
         content="Share Farm link"
-        className="scale-0 group-hover:scale-100"
+        className="scale-0 group-hover:scale-100 transition-all duration-150"
       >
         <div className="hover:scale-105 active:scale-100">
           <Menu.Button className="p-2 rounded-full bg-neutral-100 dark:bg-neutral-700 cursor-pointer text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white active:bg-neutral-200 dark:active:bg-neutral-600 transition-all duration-150">
@@ -44,7 +46,7 @@ export default function ShareMenu({ farm }: any) {
             <Menu.Item>
               {({ active }: any) => (
                 <a
-                  href={url}
+                  href={tweetUrl}
                   className={classNames([
                     active
                       ? "bg-blue-400 text-white"
@@ -76,7 +78,7 @@ export default function ShareMenu({ farm }: any) {
                     isNotificationSet(true);
                     setTimeout(() => {
                       isNotificationSet(false);
-                    }, 2000);
+                    }, 2000); // Duration for Toast
                   }}
                   className={classNames([
                     active

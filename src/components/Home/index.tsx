@@ -9,6 +9,7 @@ import { fetchListicleFarms } from "@utils/api";
 import { trackPageView } from "@utils/analytics";
 import Notification from "@components/common/Notification";
 import { XIcon } from "@heroicons/react/solid";
+import Tooltip from "@components/common/Tooltip";
 
 const Home = () => {
   const router = useRouter();
@@ -73,10 +74,15 @@ const Home = () => {
                   </div>
                 ) : (
                   <div className="inline-flex items-center text-neutral-300 space-x-2 mt-8 pb-5">
-                    <div className="w-max h-max rounded-full bg-white bg-opacity-40 active:bg-opacity-30 hover:scale-[1.05] active:scale-100 cursor-default p-1 transition-all duration-100">
-                      <XIcon className="w-4 h-4 text-white" />
-                    </div>
-                    <p>
+                    <Tooltip content="back to all farms" position="top">
+                      <button
+                        className="w-max h-max rounded-full bg-black text-neutral-600 hover:text-neutral-900 dark:text-neutral-200 hover:dark:text-white dark:bg-white bg-opacity-5 dark:bg-opacity-20 active:bg-opacity-10 dark:active:bg-opacity-[0.15] hover:scale-105 active:scale-100 cursor-default p-1.5 transition-all duration-150"
+                        onClick={() => router.push("/")}
+                      >
+                        <XIcon className="w-5 h-5" />
+                      </button>
+                    </Tooltip>
+                    <p className="text-neutral-900 dark:text-neutral-100 font-medium">
                       Showing Yield Farm with address {farmQuery} and pool ID:{" "}
                       {idQuery}
                     </p>

@@ -5,13 +5,8 @@ export default function useSpecificFarm(
 ) {
   if (!farms) return [];
   if (!farmQuery || !idQuery) return farms;
-  const farmsInAddress = farms.filter((farm: any) => {
-    if (farm.asset?.address == farmQuery) return true;
-    return false;
-  });
-
-  const specificFarm = farmsInAddress.filter((farm: any) => {
-    if (farm.id === idQuery) return true;
+  const specificFarm = farms.filter((farm: any) => {
+    if (farm.asset?.address == farmQuery && farm.id == idQuery) return true;
     return false;
   });
 
