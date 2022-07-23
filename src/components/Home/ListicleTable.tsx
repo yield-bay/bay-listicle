@@ -13,7 +13,12 @@ enum Order {
   DESC,
 }
 
-const ListicleTable = ({ farms, noResult }: any) => {
+type ListicleType = {
+  farms: any;
+  noResult?: boolean;
+};
+
+const ListicleTable = ({ farms, noResult }: ListicleType) => {
   // const [sortStatus, setSortStatus] = useState({
   //   key: "tvl",
   //   order: Order.DESC,

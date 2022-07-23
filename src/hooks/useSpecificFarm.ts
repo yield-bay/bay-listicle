@@ -3,8 +3,8 @@ export default function useSpecificFarm(
   farmQuery: string | string[] | undefined,
   idQuery: string | string[] | undefined
 ) {
-  if (!farms) return [[], true];
-  if (!farmQuery || !idQuery) return [farms];
+  if (!farms) return [];
+  if (!farmQuery || !idQuery) return farms;
   const farmsInAddress = farms.filter((farm: any) => {
     if (farm.asset?.address == farmQuery) return true;
     return false;
@@ -15,7 +15,5 @@ export default function useSpecificFarm(
     return false;
   });
 
-  const noSpecificFarm = specificFarm.length === 0;
-
-  return [specificFarm, noSpecificFarm];
+  return specificFarm;
 }
