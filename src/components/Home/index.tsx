@@ -1,16 +1,28 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import ListicleTable from "./ListicleTable";
 import SearchInputGroup from "./SearchInputGroup";
 import useFilteredFarms from "@hooks/useFilteredFarms";
+import useSpecificFarm from "@hooks/useSpecificFarm";
 import { fetchListicleFarms } from "@utils/api";
 import { trackPageView } from "@utils/analytics";
 import Notification from "@components/common/Notification";
 
 const Home = () => {
+  const router = useRouter();
   const [farms, setFarms] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredFarms, noFilteredFarms] = useFilteredFarms(farms, searchTerm);
+  // Specific Farm state: Have the farm returened from the useSpecificFarm Hook
+  const [farmQuery, setFarmQuery] = useState<string | string[] | undefined>("");
+  const [idQuery, setIdQuery] = useState<string | string[] | undefined>();
+  const specificFarm = useSpecificFarm(farms, farmQuery, idQuery);
+
+  useEffect(() => {
+    setFarmQuery(router.query.farm);
+    setIdQuery(router.query.id);
+  }, [router]);
 
   useEffect(() => {
     fetchListicleFarms().then((res: any) => {
@@ -51,16 +63,28 @@ const Home = () => {
                     </span>
                   </span>
                 </p>
-                <div className="max-w-lg mt-8">
-                  <SearchInputGroup term={searchTerm} setTerm={setSearchTerm} />
-                </div>
+                {!idQuery && (
+                  <div className="max-w-lg mt-8">
+                    <SearchInputGroup
+                      term={searchTerm}
+                      setTerm={setSearchTerm}
+                    />
+                  </div>
+                )}
               </div>
               {/* Listicle Table */}
               <div className="px-4 mx-auto max-w-6xl sm:px-6 md:px-8">
-                <ListicleTable
-                  farms={filteredFarms}
-                  noResult={noFilteredFarms}
-                />
+                {!idQuery ? (
+                  <ListicleTable
+                    farms={filteredFarms}
+                    noResult={noFilteredFarms}
+                  />
+                ) : (
+                  <ListicleTable
+                    farms={specificFarm}
+                    noResult={noSpecificFarm}
+                  />
+                )}
               </div>
             </div>
           </div>

@@ -1,16 +1,23 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ShareIcon, ClipboardIcon } from "@heroicons/react/outline";
 import { useAtom } from "jotai";
 import { isNotificationAtom } from "@store/atoms";
 import Tooltip from "@components/common/Tooltip";
+import { useRouter } from "next/router";
 
 function classNames(classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function ShareMenu({ farm }: any) {
+  const router = useRouter();
   const [, isNotificationSet] = useAtom(isNotificationAtom);
+  let [url, setUrl] = useState<string>("");
+
+  useEffect(() => {
+    setUrl(`http://localhost:3000?farm=${farm?.asset?.address}&id=${farm?.id}`);
+  }, [farm]);
 
   return (
     <Menu as="div" className="relative inline-block">
@@ -39,7 +46,7 @@ export default function ShareMenu({ farm }: any) {
             <Menu.Item>
               {({ active }: any) => (
                 <a
-                  href="https://twitter.com/share?text=Anakin%20Skywalker%20is%20not%20a%20Jedi%20Master&href=https://wookiepedia.com&hashtags=darthvader,jedi,sith"
+                  href={url}
                   className={classNames([
                     active
                       ? "bg-blue-400 text-white"
@@ -65,8 +72,10 @@ export default function ShareMenu({ farm }: any) {
             <Menu.Item>
               {({ active }: any) => (
                 <button
-                  onClick={() => {
-                    navigator.clipboard.writeText("Link to Farm");
+                  onClick={(e) => {
+                    // navigator.clipboard.writeText(url);
+                    e.preventDefault();
+                    router.push(url);
                     isNotificationSet(true);
                     setTimeout(() => {
                       isNotificationSet(false);
