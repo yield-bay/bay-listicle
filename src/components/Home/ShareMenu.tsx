@@ -4,17 +4,15 @@ import { ShareIcon, ClipboardIcon } from "@heroicons/react/outline";
 import { useAtom } from "jotai";
 import { isNotificationAtom } from "@store/atoms";
 import Tooltip from "@components/common/Tooltip";
-import { useRouter } from "next/router";
 
 function classNames(classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function ShareMenu({ farm }: any) {
-  const router = useRouter();
   const [, isNotificationSet] = useAtom(isNotificationAtom);
   let [url, setUrl] = useState<string>("");
-
+  const toastDuration = 2000;
   useEffect(() => {
     setUrl(`http://localhost:3000?farm=${farm?.asset?.address}&id=${farm?.id}`);
   }, [farm]);
@@ -73,9 +71,8 @@ export default function ShareMenu({ farm }: any) {
               {({ active }: any) => (
                 <button
                   onClick={(e) => {
-                    // navigator.clipboard.writeText(url);
-                    e.preventDefault();
-                    router.push(url);
+                    navigator.clipboard.writeText(url);
+                    // Setting toast true for duration 2000
                     isNotificationSet(true);
                     setTimeout(() => {
                       isNotificationSet(false);

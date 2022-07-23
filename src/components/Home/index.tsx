@@ -17,7 +17,11 @@ const Home = () => {
   // Specific Farm state: Have the farm returened from the useSpecificFarm Hook
   const [farmQuery, setFarmQuery] = useState<string | string[] | undefined>("");
   const [idQuery, setIdQuery] = useState<string | string[] | undefined>();
-  const specificFarm = useSpecificFarm(farms, farmQuery, idQuery);
+  const [specificFarm, noSpecificFarm] = useSpecificFarm(
+    farms,
+    farmQuery,
+    idQuery
+  );
 
   useEffect(() => {
     setFarmQuery(router.query.farm);

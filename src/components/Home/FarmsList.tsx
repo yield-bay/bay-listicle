@@ -1,6 +1,5 @@
 import Image from "next/image";
 import toDollarFormat from "@utils/toDollarFormat";
-// import * as amplitude from "@amplitude/analytics-browser";
 import { trackEventWithProperty } from "@utils/analytics";
 import ShareMenu from "./ShareMenu";
 
