@@ -12,4 +12,4 @@ export const sortStatusAtom = atom<SortStatusType>({
 
 export const sortedFarmsAtom = atom<any[]>([]);
 
-export const isNotificationAtom = atom<boolean>(true);
+export const isNotificationAtom = atom<boolean>(false);

@@ -3,6 +3,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { ShareIcon, ClipboardIcon } from "@heroicons/react/outline";
 import { useAtom } from "jotai";
 import { isNotificationAtom } from "@store/atoms";
+import Tooltip from "@components/common/Tooltip";
 
 function classNames(classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -13,11 +14,16 @@ export default function ShareMenu({ farm }: any) {
 
   return (
     <Menu as="div" className="relative inline-block">
-      <div className="hover:scale-105 active:scale-100">
-        <Menu.Button className="p-2 rounded-full scale-0 group-hover:scale-100 bg-neutral-100 dark:bg-neutral-700 cursor-pointer text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white active:bg-neutral-200 dark:active:bg-neutral-600 transition-all duration-150">
-          <ShareIcon className="w-[18px]" />
-        </Menu.Button>
-      </div>
+      <Tooltip
+        content="Share Farm link"
+        className="scale-0 group-hover:scale-100"
+      >
+        <div className="hover:scale-105 active:scale-100">
+          <Menu.Button className="p-2 rounded-full bg-neutral-100 dark:bg-neutral-700 cursor-pointer text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white active:bg-neutral-200 dark:active:bg-neutral-600 transition-all duration-150">
+            <ShareIcon className="w-[18px]" />
+          </Menu.Button>
+        </div>
+      </Tooltip>
 
       <Transition
         as={Fragment}

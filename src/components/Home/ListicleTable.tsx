@@ -81,7 +81,7 @@ const ListicleTable = ({ farms, noResult }: any) => {
                     >
                       <div className="flex items-center">
                         <Tooltip
-                          tooltipText="Total Value Locked. Amount of money currently invested in the farm, denoted in USD."
+                          content="Total Value Locked. Amount of money currently invested in the farm, denoted in USD."
                           onButtonClick={() => handleSort("tvl")}
                         >
                           <span>TVL</span>
@@ -102,7 +102,7 @@ const ListicleTable = ({ farms, noResult }: any) => {
                     >
                       <div className="flex items-center">
                         <Tooltip
-                          tooltipText="The percentage of returns the farm offers on staking for an year."
+                          content="The percentage of returns the farm offers on staking for an year."
                           onButtonClick={() => handleSort("yield")}
                         >
                           <span>Yield</span>

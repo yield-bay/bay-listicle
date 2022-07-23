@@ -24,13 +24,13 @@ export default function Notification() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="max-w-[350px] w-full bg-white shadow-md rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+          <div className="max-w-[350px] w-full bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-500 shadow-md rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
             <div className="p-4">
               <div className="flex items-center">
                 {/* Content */}
                 <div className="w-0 flex-1 flex justify-between">
                   <ClipboardIcon className="w-5 text-neutral-700 mr-2" />
-                  <p className="w-0 flex-1 text-sm font-medium text-gray-900">
+                  <p className="w-0 flex-1 text-sm font-medium text-gray-900 dark:text-white">
                     Farm link copied to clipboard.
                   </p>
                 </div>
@@ -38,13 +38,13 @@ export default function Notification() {
                 <div className="ml-4 flex-shrink-0 flex">
                   <button
                     type="button"
-                    className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none"
+                    className="rounded-md inline-flex text-neutral-400 dark:text-neutral-100 focus:outline-none"
                     onClick={() => {
                       isNotificationSet(false);
                     }}
                   >
                     <span className="sr-only">Close</span>
-                    <div className="p-1 hover:bg-neutral-100 active:hover:bg-neutral rounded-full">
+                    <div className="p-1 hover:bg-neutral-100 dark:hover:bg-neutral-600 rounded-md">
                       <XIcon className="h-5 w-5" aria-hidden="true" />
                     </div>
                   </button>
