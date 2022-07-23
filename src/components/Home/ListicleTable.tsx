@@ -67,11 +67,11 @@ const ListicleTable = ({ farms, noResult }: ListicleType) => {
   return (
     <div className="flex flex-col">
       <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full align-middle md:px-0 lg:px-8 lg:py-4 dark:bg-neutral-900">
+        <div className="inline-block min-w-full align-middle md:px-0 lg:px-8 lg:py-4">
           {farms.length > 0 ? (
             <div className="overflow-hidden shadow ring-1 ring-black dark:ring-white ring-opacity-5 dark:ring-opacity-20 md:rounded-lg">
               <table className="min-w-full divide-y divide-neutral-300 dark:divide-neutral-600 text-neutral-900 dark:text-white">
-                <thead className="bg-neutral-50 dark:bg-neutral-700">
+                <thead className="bg-neutral-50 dark:bg-neutral-700 transition duration-200">
                   <tr>
                     <th
                       scope="col"
@@ -129,7 +129,7 @@ const ListicleTable = ({ farms, noResult }: ListicleType) => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-200 dark:divide-neutral-600 bg-white dark:bg-neutral-800">
+                <tbody className="divide-y divide-neutral-200 dark:divide-neutral-600 bg-white dark:bg-neutral-800 transition duration-200">
                   <FarmsList farms={sortedFarms} />
                 </tbody>
               </table>

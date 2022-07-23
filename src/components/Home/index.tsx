@@ -8,6 +8,7 @@ import useSpecificFarm from "@hooks/useSpecificFarm";
 import { fetchListicleFarms } from "@utils/api";
 import { trackPageView } from "@utils/analytics";
 import Notification from "@components/common/Notification";
+import { XIcon } from "@heroicons/react/solid";
 
 const Home = () => {
   const router = useRouter();
@@ -63,12 +64,22 @@ const Home = () => {
                     </span>
                   </span>
                 </p>
-                {!idQuery && (
+                {!idQuery ? (
                   <div className="max-w-lg mt-8">
                     <SearchInputGroup
                       term={searchTerm}
                       setTerm={setSearchTerm}
                     />
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center text-neutral-300 space-x-2 mt-8 pb-5">
+                    <div className="w-max h-max rounded-full bg-white bg-opacity-40 active:bg-opacity-30 hover:scale-[1.05] active:scale-100 cursor-default p-1 transition-all duration-100">
+                      <XIcon className="w-4 h-4 text-white" />
+                    </div>
+                    <p>
+                      Showing Yield Farm with address {farmQuery} and pool ID:{" "}
+                      {idQuery}
+                    </p>
                   </div>
                 )}
               </div>
