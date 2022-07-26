@@ -44,7 +44,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="border-t dark:border-neutral-800 dark:bg-neutral-800 dark:bg-opacity-60"
+      className="border-t dark:border-neutral-800 dark:bg-neutral-800 dark:bg-opacity-60 transition duration-200"
       aria-labelledby="footer-heading"
     >
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
