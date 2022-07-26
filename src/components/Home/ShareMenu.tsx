@@ -15,9 +15,8 @@ export default function ShareMenu({ farm, apr }: any) {
   const tweetUrl =
     `https://twitter.com/share?text=I%20found%20this%20farm%20with%20${apr}﹪%20APR.%20If%20you're%20looking%20for%20yield%20farms%20in%20the%20dotsama%20ecosystem,%20give%20@yield_bay%20a%20shot.%20` +
     encodeURIComponent(url);
-  // UTM not added yet
-  const UtmLink =
-    "?utm_campaign=share-farm&utm_source=yb-list&utm_medium=textlink";
+  const utmLink =
+    "&utm_campaign=share-farm&utm_source=yb-list&utm_medium=textlink";
 
   useEffect(() => {
     setUrl(
@@ -25,7 +24,7 @@ export default function ShareMenu({ farm, apr }: any) {
         typeof window !== "undefined"
           ? window.location.host
           : "https://list.yieldbay.io"
-      }?farm=${farm.asset?.address}&id=${farm.id}`
+      }?farm=${farm.asset?.address}&id=${farm.id}` + utmLink
     );
   }, [farm]);
 
