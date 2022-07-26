@@ -17,12 +17,11 @@ export default function ShareMenu({ farm, apr }: any) {
     encodeURIComponent(url);
   const utmLink =
     "&utm_campaign=share-farm&utm_source=yb-list&utm_medium=textlink";
-
   useEffect(() => {
     setUrl(
       `${
         typeof window !== "undefined"
-          ? window.location.host
+          ? window.location.host // for testing locally
           : "https://list.yieldbay.io"
       }?farm=${farm.asset?.address}&id=${farm.id}` + utmLink
     );
@@ -32,10 +31,10 @@ export default function ShareMenu({ farm, apr }: any) {
     <Menu as="div" className="relative inline-block">
       <Tooltip
         content="Share Farm link"
-        className="scale-0 group-hover:scale-100 transition-all duration-150"
+        className="transition-all duration-150"
       >
         <div className="hover:scale-105 active:scale-100">
-          <Menu.Button className="p-2 rounded-full bg-neutral-100 dark:bg-neutral-700 cursor-pointer text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white active:bg-neutral-200 dark:active:bg-neutral-600 transition-all duration-150">
+          <Menu.Button className="p-2 rounded-md bg-neutral-100 dark:bg-neutral-700 cursor-pointer text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white active:bg-neutral-200 dark:active:bg-neutral-600 transition-all duration-150">
             <ShareIcon className="w-[18px]" />
           </Menu.Button>
         </div>

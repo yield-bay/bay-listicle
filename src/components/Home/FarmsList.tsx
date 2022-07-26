@@ -23,7 +23,7 @@ const FarmsList = ({ farms }: any) => {
   return (
     <>
       {farms.map((farm: any) => (
-        <tr key={`${farm.asset.address}-${farm.tvl}`} className="group">
+        <tr key={`${farm.asset.address}-${farm.tvl}`}>
           <td className="whitespace-nowrap py-6 pl-4 pr-3 text-sm sm:pl-6">
             <div className="flex items-center">
               <div className="flex md:hidden lg:flex flex-row items-center justify-center -space-x-2">
@@ -70,15 +70,18 @@ const FarmsList = ({ farms }: any) => {
           <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100 font-semibold">
             {(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}%
           </td>
-          <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-            <div className="flex justify-center">
+          <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+            <div className="relative flex justify-start lg:justify-center">
               {/* Share Icon */}
-              <div className="absolute left-0 hidden md:block">
-                <ShareMenu
-                  farm={farm}
-                  apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}
-                />
-              </div>
+              {typeof window !== "undefined" &&
+                window.location.search.length == 0 && ( // not showing share-icon in specific-farm view
+                  <div className="absolute hidden md:block md:right-0 lg:right-1">
+                    <ShareMenu
+                      farm={farm}
+                      apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}
+                    />
+                  </div>
+                )}
               <a
                 href={farmURL(farm?.protocol)}
                 target="_blank"
