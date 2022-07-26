@@ -9,14 +9,24 @@ function classNames(classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ShareMenu({ farm }: any) {
+export default function ShareMenu({ farm, apr }: any) {
   const [, isNotificationSet] = useAtom(isNotificationAtom);
   let [url, setUrl] = useState<string>("");
   const tweetUrl =
-    `https://twitter.com/share?text=This%20farm%20is%20a%20fabulous%20opportunity,%20must%20check%20it%20out&url=` +
-    url;
+    `https://twitter.com/share?text=I%20found%20this%20farm%20with%20${apr}﹪%20APR.%20If%20you're%20looking%20for%20yield%20farms%20in%20the%20dotsama%20ecosystem,%20give%20@yield_bay%20a%20shot.%20` +
+    encodeURIComponent(url);
+  // UTM not added yet
+  const UtmLink =
+    "?utm_campaign=share-farm&utm_source=yb-list&utm_medium=textlink";
+
   useEffect(() => {
-    setUrl(`http://localhost:3000?farm=${farm?.asset?.address}&id=${farm?.id}`);
+    setUrl(
+      `${
+        typeof window !== "undefined"
+          ? window.location.host
+          : "https://list.yieldbay.io"
+      }?farm=${farm.asset?.address}&id=${farm.id}`
+    );
   }, [farm]);
 
   return (

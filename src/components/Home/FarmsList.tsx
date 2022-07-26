@@ -74,7 +74,10 @@ const FarmsList = ({ farms }: any) => {
             <div className="flex justify-center">
               {/* Share Icon */}
               <div className="absolute left-0 hidden md:block">
-                <ShareMenu farm={farm} />
+                <ShareMenu
+                  farm={farm}
+                  apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}
+                />
               </div>
               <a
                 href={farmURL(farm?.protocol)}

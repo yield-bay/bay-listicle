@@ -135,7 +135,7 @@ const ListicleTable = ({ farms, noResult }: ListicleType) => {
               </table>
             </div>
           ) : noResult ? (
-            <div className="px-6 py-10 text-center border border-neutral-200 dark:border-neutral-600 sm:rounded-lg">
+            <div className="px-6 py-10 text-center border border-neutral-200 dark:border-neutral-600 sm:rounded-lg transition duration-200">
               Sorry, there is no farm available according to your preference 😔
             </div>
           ) : (
