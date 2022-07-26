@@ -6,14 +6,19 @@ import {
   ArrowNarrowUpIcon,
 } from "@heroicons/react/outline";
 import FarmsList from "./FarmsList";
-import Tooltip from "@components/Tooltip";
+import Tooltip from "@components/common/Tooltip";
 
 enum Order {
   ASC,
   DESC,
 }
 
-const ListicleTable = ({ farms, noResult }: any) => {
+type ListicleType = {
+  farms: any;
+  noResult?: boolean;
+};
+
+const ListicleTable = ({ farms, noResult }: ListicleType) => {
   // const [sortStatus, setSortStatus] = useState({
   //   key: "tvl",
   //   order: Order.DESC,
@@ -62,11 +67,11 @@ const ListicleTable = ({ farms, noResult }: any) => {
   return (
     <div className="flex flex-col">
       <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full align-middle md:px-0 lg:px-8 lg:py-4 dark:bg-neutral-900">
+        <div className="inline-block min-w-full align-middle md:px-0 lg:px-8 lg:py-4">
           {farms.length > 0 ? (
             <div className="overflow-hidden shadow ring-1 ring-black dark:ring-white ring-opacity-5 dark:ring-opacity-20 md:rounded-lg">
               <table className="min-w-full divide-y divide-neutral-300 dark:divide-neutral-600 text-neutral-900 dark:text-white">
-                <thead className="bg-neutral-50 dark:bg-neutral-700">
+                <thead className="bg-neutral-50 dark:bg-neutral-700 transition duration-200">
                   <tr>
                     <th
                       scope="col"
@@ -81,7 +86,7 @@ const ListicleTable = ({ farms, noResult }: any) => {
                     >
                       <div className="flex items-center">
                         <Tooltip
-                          tooltipText="Total Value Locked. Amount of money currently invested in the farm, denoted in USD."
+                          content="Total Value Locked. Amount of money currently invested in the farm, denoted in USD."
                           onButtonClick={() => handleSort("tvl")}
                         >
                           <span>TVL</span>
@@ -102,7 +107,7 @@ const ListicleTable = ({ farms, noResult }: any) => {
                     >
                       <div className="flex items-center">
                         <Tooltip
-                          tooltipText="The percentage of returns the farm offers on staking for an year."
+                          content="The percentage of returns the farm offers on staking for an year."
                           onButtonClick={() => handleSort("yield")}
                         >
                           <span>Yield</span>
@@ -124,13 +129,13 @@ const ListicleTable = ({ farms, noResult }: any) => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-200 dark:divide-neutral-600 bg-white dark:bg-neutral-800">
+                <tbody className="divide-y divide-neutral-200 dark:divide-neutral-600 bg-white dark:bg-neutral-800 transition duration-200">
                   <FarmsList farms={sortedFarms} />
                 </tbody>
               </table>
             </div>
           ) : noResult ? (
-            <div className="px-6 py-10 text-center border border-neutral-200 dark:border-neutral-600 sm:rounded-lg">
+            <div className="px-6 py-10 text-center border border-neutral-200 dark:border-neutral-600 sm:rounded-lg transition duration-200">
               Sorry, there is no farm available according to your preference 😔
             </div>
           ) : (

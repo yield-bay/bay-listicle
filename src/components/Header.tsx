@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Header() {
   const { theme, setTheme } = useTheme();
   return (
-    <div className="w-full flex items-center p-2 pl-6 md:pl-4 z-10 bg-primary-50 border-b dark:border-neutral-800 dark:bg-neutral-800 dark:bg-opacity-60 font-medium text-sm md:text-base text-neutral-800 dark:text-white">
+    <div className="w-full flex items-center p-2 pl-6 md:pl-4 z-10 bg-primary-50 border-b dark:border-neutral-800 dark:bg-neutral-800 dark:bg-opacity-60 font-medium text-sm md:text-base text-neutral-800 dark:text-white transition duration-200">
       <div className="inline-flex items-center px-4 py-1.5 text-xl font-bold space-x-2 rounded cursor-pointer">
         <Image
           src="/yieldbay-logo-shine.png"
