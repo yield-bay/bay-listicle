@@ -26,7 +26,7 @@ const FarmsList = ({ farms }: any) => {
         <tr key={`${farm.asset.address}-${farm.tvl}`}>
           <td className="whitespace-nowrap py-6 pl-4 pr-3 text-sm sm:pl-6">
             <div className="flex items-center">
-              <div className="flex md:hidden lg:flex flex-row items-center justify-center -space-x-2">
+              <div className="hidden md:flex flex-row items-center justify-center -space-x-2">
                 <div className="z-0 flex overflow-hidden ring-2 ring-neutral-300 dark:ring-neutral-500 rounded-full bg-white dark:bg-neutral-800">
                   <Image
                     src={farm?.asset?.tokens[0]?.logo}
@@ -70,12 +70,12 @@ const FarmsList = ({ farms }: any) => {
           <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100 font-semibold">
             {(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}%
           </td>
-          <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-            <div className="relative flex justify-start lg:justify-center">
+          <td className="whitespace-nowrap py-4 pl-14 pr-4 sm:pl-4 sm:pr-6 text-right text-sm font-medium">
+            <div className="relative flex items-center justify-start lg:justify-center">
               {/* Share Icon */}
               {typeof window !== "undefined" &&
                 window.location.search.length == 0 && ( // not showing share-icon in specific-farm view
-                  <div className="absolute hidden md:block md:right-0 lg:right-1">
+                  <div className="absolute -left-11 md:right-0 lg:right-1">
                     <ShareMenu
                       farm={farm}
                       apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}
@@ -88,7 +88,7 @@ const FarmsList = ({ farms }: any) => {
                 rel="noreferrer"
               >
                 <button
-                  className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-100 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300"
+                  className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300"
                   onClick={() =>
                     trackEventWithProperty("go-to-farm", {
                       protocol: farm?.protocol,
