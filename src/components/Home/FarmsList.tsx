@@ -73,15 +73,15 @@ const FarmsList = ({ farms }: any) => {
           <td className="whitespace-nowrap py-4 pl-14 pr-4 sm:pl-4 sm:pr-6 text-right text-sm font-medium">
             <div className="relative flex items-center justify-start lg:justify-center">
               {/* Share Icon */}
-              {typeof window !== "undefined" &&
-                window.location.search.length == 0 && ( // not showing share-icon in specific-farm view
+              {/* {typeof window !== "undefined" &&
+                window.location.search.length == 0 && ( // not showing share-icon in specific-farm view */}
                   <div className="absolute -left-11 md:right-0 lg:right-1">
                     <ShareMenu
                       farm={farm}
                       apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}
                     />
                   </div>
-                )}
+              {/* )} */}
               <a
                 href={farmURL(farm?.protocol)}
                 target="_blank"
