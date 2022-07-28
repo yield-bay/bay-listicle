@@ -16,7 +16,6 @@ const Home = () => {
   const [farms, setFarms] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredFarms, noFilteredFarms] = useFilteredFarms(farms, searchTerm);
-  // Specific Farm state: Have the farm returened from the useSpecificFarm Hook
   const [farmQuery, setFarmQuery] = useState<string | string[] | undefined>("");
   const [idQuery, setIdQuery] = useState<string | string[] | undefined>();
   const specificFarm = useSpecificFarm(farms, farmQuery, idQuery);
