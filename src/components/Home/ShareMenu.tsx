@@ -4,6 +4,7 @@ import { ShareIcon, ClipboardIcon } from "@heroicons/react/outline";
 import { useAtom } from "jotai";
 import { isNotificationAtom } from "@store/atoms";
 import Tooltip from "@components/common/Tooltip";
+import { trackEventWithProperty } from "@utils/analytics";
 
 function classNames(classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -63,6 +64,13 @@ export default function ShareMenu({ farm, apr }: any) {
                   ])}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() =>
+                    trackEventWithProperty("farm-share", {
+                      shareVia: "twitter",
+                      farmAddress: farm.asset?.address,
+                      farmId: farm.id,
+                    })
+                  }
                 >
                   <span className="sr-only">Share on Twitter</span>
                   <svg
@@ -82,11 +90,16 @@ export default function ShareMenu({ farm, apr }: any) {
                 <button
                   onClick={(e) => {
                     navigator.clipboard.writeText(url);
-                    // Setting toast true for duration 2000
                     isNotificationSet(true);
                     setTimeout(() => {
                       isNotificationSet(false);
                     }, 2000); // Duration for Toast
+
+                    trackEventWithProperty("farm-share", {
+                      shareVia: "copy",
+                      farmAddress: farm.asset?.address,
+                      farmId: farm.id,
+                    });
                   }}
                   className={classNames([
                     active

@@ -7,6 +7,7 @@ import {
 } from "@heroicons/react/outline";
 import FarmsList from "./FarmsList";
 import Tooltip from "@components/common/Tooltip";
+import { trackEventWithProperty } from "@utils/analytics";
 
 enum Order {
   ASC,
@@ -87,7 +88,12 @@ const ListicleTable = ({ farms, noResult }: ListicleType) => {
                       <div className="flex items-center">
                         <Tooltip
                           content="Total Value Locked. Amount of money currently invested in the farm, denoted in USD."
-                          onButtonClick={() => handleSort("tvl")}
+                          onButtonClick={() => {
+                            handleSort("tvl");
+                            trackEventWithProperty("table-sorting", {
+                              sortingType: "tvl",
+                            });
+                          }}
                         >
                           <span>TVL</span>
                           {/* <QuestionMarkCircleIcon className="w-4 h-5 ml-1 text-neutral-500 dark:text-neutral-400" /> */}
@@ -103,7 +109,12 @@ const ListicleTable = ({ farms, noResult }: ListicleType) => {
                     <th
                       scope="col"
                       className="flex px-3 py-3.5 text-left text-sm font-medium tracking-wider cursor-pointer"
-                      onClick={() => handleSort("yield")}
+                      onClick={() => {
+                        handleSort("yield");
+                        trackEventWithProperty("table-sorting", {
+                          sortingType: "yield",
+                        });
+                      }}
                     >
                       <div className="flex items-center">
                         <Tooltip

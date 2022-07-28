@@ -1,4 +1,5 @@
 import { SearchIcon } from "@heroicons/react/outline";
+import { trackEventWithProperty } from "@utils/analytics";
 
 type SearchInputProps = {
   term: string;
@@ -19,7 +20,10 @@ export default function SearchInputGroup({ term, setTerm }: SearchInputProps) {
           type="search"
           id="text"
           value={term}
-          onChange={(event) => setTerm(event.target.value)}
+          onChange={(event) => {
+            setTerm(event.target.value);
+            trackEventWithProperty("farm-search"); // No proprty as none required
+          }}
           className="block w-full pl-10 py-2 pr-3 font-normal text-gray-500 bg-gray-100 border-none outline-none dark:text-gray-400 sm:text-sm rounded-md dark:bg-gray-700 transition-all duration-200"
           placeholder="Search by token, chain or protocol name"
         />
