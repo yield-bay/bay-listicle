@@ -55,14 +55,8 @@ const FarmsList = ({ farms }: any) => {
           <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100 font-semibold">
             {(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}%
           </td>
-          <td className="whitespace-nowrap py-4 pl-14 pr-4 sm:pl-4 sm:pr-6 text-right text-sm font-medium">
+          <td className="whitespace-nowrap py-4 px-7 sm:px-4 text-right text-sm font-medium">
             <div className="relative flex items-center justify-start lg:justify-center">
-              <div className="absolute -left-11 md:right-0 lg:right-1">
-                <ShareFarm
-                  farm={farm}
-                  apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}
-                />
-              </div>
               <a
                 href={farmURL(farm?.protocol)}
                 target="_blank"
@@ -79,6 +73,12 @@ const FarmsList = ({ farms }: any) => {
                   <p>Go to farm</p>
                 </button>
               </a>
+              <div className="ml-3 sm:ml-0 w-1/3 text-center">
+                <ShareFarm
+                  farm={farm}
+                  apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}
+                />
+              </div>
             </div>
           </td>
         </tr>
