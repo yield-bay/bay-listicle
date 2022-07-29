@@ -169,7 +169,7 @@ const ShareModal = ({
         className="fixed z-10 inset-0 overflow-y-auto"
         onClose={setOpen}
       >
-        <div className="flex flex-col items-center justify-center min-h-screen px-4 border border-red-500 text-center">
+        <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -214,7 +214,7 @@ const ShareModal = ({
               <div className="mt-3 w-full">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg text-left leading-6 px-5 font-heading font-medium text-neutral-900 dark:text-white"
+                  className="text-lg text-center leading-6 px-5 font-heading font-medium text-neutral-900 dark:text-white"
                 >
                   Share farm
                 </Dialog.Title>
