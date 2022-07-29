@@ -1,25 +1,31 @@
-import { useEffect, useState } from "react";
-import FarmsList from "./FarmsList";
 import Tooltip from "@components/common/Tooltip";
+import { trackEventWithProperty } from "@utils/analytics";
+import Image from "next/image";
+import toDollarFormat from "@utils/toDollarFormat";
+import ShareFarm from "./ShareFarm";
+import { useEffect, useState } from "react";
 
 type FarmType = {
   farms: any;
   noResult: boolean;
 };
 
+function formatFirstLetter(name: string): string {
+  return name.slice(0, 1).toUpperCase() + name.slice(1);
+}
+
+function farmURL(protocol: string): string {
+  if (protocol == "stellaswap") return "https://app.stellaswap.com/farm";
+  if (protocol == "solarbeam") return "https://app.solarbeam.io/farm";
+  return "";
+}
+
 const SpecificFarm = ({ farms, noResult }: FarmType) => {
-  const [farm, setFarm] = useState([]);
-
-  useEffect(() => {
-    if (farms.length > 0) setFarm(farms);
-  }, [farms]);
-
   return (
     <div className="flex flex-col">
-      {/* <div className="-my-2 -mx-4 overflow-x-auto border border-red-500 sm:-mx-6 lg:-mx-8"> */}
-      <div className="-my-2 -mx-4 overflow-x-auto min-w-full border border-red-500 align-middle sm:-mx-6 lg:-mx-8 lg:px-8 lg:py-4 px-5">
+      <div className="-my-2 -mx-4 overflow-x-auto sm:overflow-visible min-w-full align-middle sm:-mx-6 lg:-mx-8 px-0 lg:px-8 lg:py-4">
         {farms.length > 0 ? (
-          <div className="shadow ring-1 ring-black dark:ring-white ring-opacity-5 dark:ring-opacity-20 md:rounded-lg">
+          <div className="shadow ring-1 ring-black dark:ring-neutral-700 ring-opacity-5 md:rounded-lg">
             <table className="min-w-full divide-y ring-1 ring-black dark:ring-white ring-opacity-5 rounded-lg dark:ring-opacity-20 divide-neutral-300 dark:divide-neutral-600 text-neutral-900 dark:text-white">
               <thead className="bg-red-50 dark:bg-neutral-700 rounded-lg transition duration-200">
                 <tr className="rounded-lg">
@@ -58,7 +64,79 @@ const SpecificFarm = ({ farms, noResult }: FarmType) => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-neutral-200 dark:divide-neutral-600 bg-white dark:bg-neutral-800 transition duration-200">
-                <FarmsList farms={farm} />
+                {farms.map((farm: any) => (
+                  <tr key={`${farm.asset.address}-${farm.tvl}`}>
+                    <td className="whitespace-nowrap py-6 pl-4 pr-3 text-sm sm:pl-6 rounded-bl-lg">
+                      <div className="flex items-center">
+                        <div className="hidden md:flex flex-row items-center justify-center -space-x-2">
+                          <div className="z-0 flex overflow-hidden ring-2 ring-neutral-300 dark:ring-neutral-500 rounded-full bg-white dark:bg-neutral-800">
+                            <Image
+                              src={farm?.asset?.tokens[0]?.logo}
+                              alt={farm?.asset?.tokens[0]?.symbol}
+                              width={36}
+                              height={36}
+                            />
+                          </div>
+                          <div className="z-10 flex overflow-hidden ring-2 ring-neutral-300 dark:ring-neutral-500 rounded-full bg-white dark:bg-neutral-800">
+                            <Image
+                              src={farm?.asset?.tokens[1]?.logo}
+                              alt={farm?.asset?.tokens[1]?.symbol}
+                              width={36}
+                              height={36}
+                            />
+                          </div>
+                        </div>
+                        <div className="ml-2 flex flex-col gap-y-0.5">
+                          <div className="flex flex-row items-center">
+                            <div className="font-semibold tracking-wide">
+                              <span>{farm?.asset?.tokens[0]?.symbol}</span>
+                              {" • "}
+                              <span>{farm?.asset?.tokens[1]?.symbol}</span>
+                            </div>
+                          </div>
+                          <div className="text-neutral-500 dark:text-neutral-400 font-medium">
+                            {formatFirstLetter(farm?.protocol)} on{" "}
+                            {formatFirstLetter(farm?.chain)}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100 font-semibold">
+                      {toDollarFormat(farm?.tvl)}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100 font-semibold">
+                      {(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}%
+                    </td>
+                    <td className="whitespace-nowrap rounded-br-lg py-4 pl-14 pr-4 sm:pl-4 sm:pr-6 text-right text-sm font-medium">
+                      <div className="relative flex items-center justify-start lg:justify-center">
+                        <div className="absolute -left-11 md:right-0 lg:right-1">
+                          <ShareFarm
+                            farm={farm}
+                            apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(
+                              2
+                            )}
+                          />
+                        </div>
+                        <a
+                          href={farmURL(farm?.protocol)}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <button
+                            className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300"
+                            onClick={() =>
+                              trackEventWithProperty("go-to-farm", {
+                                protocol: farm?.protocol,
+                              })
+                            }
+                          >
+                            <p>Go to farm</p>
+                          </button>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -68,7 +146,7 @@ const SpecificFarm = ({ farms, noResult }: FarmType) => {
           </div>
         ) : (
           <div className="px-6 py-10 text-center animate-pulse text-lg text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-600 sm:rounded-lg">
-            🌾 Finding Farms 🌾
+            🌾 Finding farm 🌾
           </div>
         )}
       </div>
