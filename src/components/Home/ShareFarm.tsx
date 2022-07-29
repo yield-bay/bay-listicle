@@ -1,18 +1,10 @@
 import { Fragment, useEffect, useState } from "react";
 import { Menu, Dialog, Transition } from "@headlessui/react";
-import {
-  ShareIcon,
-  ClipboardIcon,
-  XIcon,
-  DuplicateIcon,
-  CheckCircleIcon,
-  ExternalLinkIcon,
-} from "@heroicons/react/outline";
+import { ShareIcon, ClipboardIcon, XIcon } from "@heroicons/react/outline";
 import { useAtom } from "jotai";
 import { isNotificationAtom } from "@store/atoms";
 import Tooltip from "@components/common/Tooltip";
 import { trackEventWithProperty } from "@utils/analytics";
-import Image from "next/image";
 
 function classNames(classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -48,18 +40,21 @@ export default function ShareFarm({ farm, apr }: any) {
       />
       {/* Modal for Mobile Mode */}
       <div className="sm:hidden">
-        {/* <Tooltip
-          content="Share Farm link"
-          className="transition-all duration-150"
-        > */}
         <div
           className="p-2 hover:scale-105 active:scale-100 rounded-md bg-neutral-100 dark:bg-neutral-700 cursor-pointer text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white active:bg-neutral-200 dark:active:bg-neutral-600 transition-all duration-150"
           onClick={() => setModalOpen(true)}
         >
           <ShareIcon className="w-[18px]" />
         </div>
-        {/* </Tooltip> */}
-        <ShareModal open={modalOpen} setOpen={setModalOpen} />
+        <ShareModal
+          open={modalOpen}
+          setOpen={setModalOpen}
+          url={url}
+          tweetUrl={tweetUrl}
+          isNotificationSet={isNotificationSet}
+          farmAddress={farm?.asset.address}
+          farmId={farm?.id}
+        />
       </div>
     </div>
   );
@@ -158,8 +153,15 @@ const ShareMenu = ({ farm, url, tweetUrl, isNotificationSet }: any) => {
   );
 };
 
-const ShareModal = ({ open, setOpen }: any) => {
-  const [isCopied, setIsCopied] = useState(false);
+const ShareModal = ({
+  open,
+  setOpen,
+  url,
+  tweetUrl,
+  isNotificationSet,
+  farmAddress,
+  farmId,
+}: any) => {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -167,7 +169,7 @@ const ShareModal = ({ open, setOpen }: any) => {
         className="fixed z-10 inset-0 overflow-y-auto"
         onClose={setOpen}
       >
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="flex flex-col items-center justify-center min-h-screen px-4 border border-red-500 text-center">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -194,57 +196,81 @@ const ShareModal = ({ open, setOpen }: any) => {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="relative inline-block sm:hidden align-bottom bg-white dark:bg-neutral-800 rounded-xl px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-3/4 sm:max-w-md sm:w-full sm:py-6">
+            <div className="relative inline-block sm:hidden align-middle bg-white dark:bg-neutral-800 rounded-lg pt-5 pb-6 overflow-hidden shadow-xl transform transition-all w-full max-w-sm">
+              {/* Close Button */}
               <div className="absolute top-0 right-0 pt-2 pr-2 sm:block">
-                <div className="flex items-center p-1 group rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer">
+                <div className="flex items-center p-1 group rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700">
                   <button
                     type="button"
-                    className="text-neutral-600 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-neutral-300 focus:outline-none"
+                    className="text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white focus:outline-none"
                     onClick={() => setOpen(false)}
                   >
                     <span className="sr-only">Close</span>
-                    <XIcon className="w-6 h-6" aria-hidden="true" />
+                    <XIcon className="w-5 h-5" aria-hidden="true" />
                   </button>
                 </div>
               </div>
-              <div className="sm:flex sm:items-start">
-                <div className="mt-3 text-center sm:mt-0 w-full sm:text-left">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg leading-6 font-heading font-medium text-neutral-900 dark:text-white"
-                  >
-                    Account
-                  </Dialog.Title>
-                  <div className="border border-neutral-300 dark:border-neutral-600 w-full rounded-xl py-5 mt-3 px-4">
-                    <div className="mt-4 flex flex-col justify-center sm:justify-start sm:flex-row w-full text-neutral-500 dark:text-neutral-300">
-                      <button
-                        onClick={() => {
-                          navigator.clipboard.writeText("bindaas rehne ka");
-                          setIsCopied(true);
-                          setTimeout(() => {
-                            setIsCopied(false);
-                          }, 500);
-                        }}
+              {/* Modal content */}
+              <div className="mt-3 w-full">
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg text-left leading-6 px-5 font-heading font-medium text-neutral-900 dark:text-white"
+                >
+                  Share farm
+                </Dialog.Title>
+                <div className="w-full pt-2">
+                  <div className="flex flex-col w-full text-neutral-500 dark:text-neutral-300">
+                    {/* Share on Twitter button */}
+                    <a
+                      href={tweetUrl}
+                      className="text-sm inline-flex justify-center font-medium border-y border-neutral-100 dark:border-neutral-700 py-4 px-6 active:text-neutral-600 active:dark:text-neutral-100 active:bg-neutral-100 dark:active:bg-neutral-700 cursor-pointer"
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => {
+                        trackEventWithProperty("farm-share", {
+                          shareVia: "twitter",
+                          farmAddress: farmAddress,
+                          farmId: farmId,
+                        });
+                        setOpen(false);
+                      }}
+                    >
+                      <span className="sr-only">Share on Twitter</span>
+                      <svg
+                        className="h-5 w-5 mr-3 text-blue-400"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
                       >
-                        <div className="text-sm font-medium hover:text-neutral-600 hover:dark:text-neutral-100">
-                          {isCopied ? (
-                            <div className="inline-flex items-center">
-                              <CheckCircleIcon className="w-5 h-5 mr-1" />
-                              <p>Copied</p>
-                            </div>
-                          ) : (
-                            <div className="inline-flex items-center">
-                              <DuplicateIcon className="w-5 h-5 mr-1" />
-                              <p>Copy Address</p>
-                            </div>
-                          )}
-                        </div>
-                      </button>
-                      <div className="sm:ml-8 text-sm font-medium hover:text-neutral-600 hover:dark:text-neutral-100">
-                        <ExternalLinkIcon className="h-5 w-5 mr-1" />
-                        <p>View on Explorer</p>
-                      </div>
-                    </div>
+                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                      </svg>
+                      Share on Twitter
+                    </a>
+                    {/* Copy Link Button */}
+                    <button
+                      onClick={(e) => {
+                        navigator.clipboard.writeText(url);
+                        isNotificationSet(true);
+                        setTimeout(() => {
+                          isNotificationSet(false);
+                        }, 2000); // Duration for Toast
+
+                        setOpen(false);
+
+                        trackEventWithProperty("farm-share", {
+                          shareVia: "copy",
+                          farmAddress: farmAddress,
+                          farmId: farmId,
+                        });
+                      }}
+                      className="text-sm inline-flex justify-center font-medium border-b border-neutral-100 dark:border-neutral-700 py-4 px-6 active:text-neutral-600 active:dark:text-neutral-100 active:bg-neutral-100 dark:active:bg-neutral-700 cursor-pointer"
+                    >
+                      <ClipboardIcon
+                        className="mr-3 h-5 w-5"
+                        aria-hidden="true"
+                      />
+                      Copy link
+                    </button>
                   </div>
                 </div>
               </div>
