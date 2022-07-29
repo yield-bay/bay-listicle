@@ -1,25 +1,10 @@
 import Image from "next/image";
 import toDollarFormat from "@utils/toDollarFormat";
 import { trackEventWithProperty } from "@utils/analytics";
+import { formatFirstLetter, farmURL } from "@utils/farmlistMethods";
 import ShareFarm from "./ShareFarm";
 
 const FarmsList = ({ farms }: any) => {
-  // function formatFarmType(farmType: string): string {
-  //   let formatted = farmType.slice(0, -3).toUpperCase(); // removed Amm and uppercased
-  //   // formatted = formatted.slice(0, 1) + formatted.slice(1).toLowerCase();
-  //   return formatted.concat(" SWAP");
-  // }
-
-  function formatFirstLetter(name: string): string {
-    return name.slice(0, 1).toUpperCase() + name.slice(1);
-  }
-
-  function farmURL(protocol: string): string {
-    if (protocol == "stellaswap") return "https://app.stellaswap.com/farm";
-    if (protocol == "solarbeam") return "https://app.solarbeam.io/farm";
-    return "";
-  }
-
   return (
     <>
       {farms.map((farm: any) => (
@@ -72,16 +57,12 @@ const FarmsList = ({ farms }: any) => {
           </td>
           <td className="whitespace-nowrap py-4 pl-14 pr-4 sm:pl-4 sm:pr-6 text-right text-sm font-medium">
             <div className="relative flex items-center justify-start lg:justify-center">
-              {/* Share Icon */}
-              {/* {typeof window !== "undefined" &&
-                window.location.search.length == 0 && ( // not showing share-icon in specific-farm view */}
               <div className="absolute -left-11 md:right-0 lg:right-1">
                 <ShareFarm
                   farm={farm}
                   apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}
                 />
               </div>
-              {/* )} */}
               <a
                 href={farmURL(farm?.protocol)}
                 target="_blank"

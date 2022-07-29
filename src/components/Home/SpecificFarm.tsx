@@ -1,24 +1,14 @@
+import Image from "next/image";
 import Tooltip from "@components/common/Tooltip";
 import { trackEventWithProperty } from "@utils/analytics";
-import Image from "next/image";
 import toDollarFormat from "@utils/toDollarFormat";
+import { formatFirstLetter, farmURL } from "@utils/farmlistMethods";
 import ShareFarm from "./ShareFarm";
-import { useEffect, useState } from "react";
 
 type FarmType = {
   farms: any;
   noResult: boolean;
 };
-
-function formatFirstLetter(name: string): string {
-  return name.slice(0, 1).toUpperCase() + name.slice(1);
-}
-
-function farmURL(protocol: string): string {
-  if (protocol == "stellaswap") return "https://app.stellaswap.com/farm";
-  if (protocol == "solarbeam") return "https://app.solarbeam.io/farm";
-  return "";
-}
 
 const SpecificFarm = ({ farms, noResult }: FarmType) => {
   return (
@@ -150,7 +140,6 @@ const SpecificFarm = ({ farms, noResult }: FarmType) => {
           </div>
         )}
       </div>
-      {/* </div> */}
     </div>
   );
 };

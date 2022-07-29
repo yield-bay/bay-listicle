@@ -179,7 +179,7 @@ const ShareModal = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-zinc-500 backdrop-blur-sm bg-opacity-60 transition-opacity" />
+            <Dialog.Overlay className="fixed inset-0 bg-zinc-500 bg-opacity-70 transition-opacity" />
           </Transition.Child>
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
