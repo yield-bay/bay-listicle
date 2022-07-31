@@ -2,7 +2,11 @@ import Image from "next/image";
 import Tooltip from "@components/common/Tooltip";
 import { trackEventWithProperty } from "@utils/analytics";
 import toDollarFormat from "@utils/toDollarFormat";
-import { formatFirstLetter, farmURL } from "@utils/farmlistMethods";
+import {
+  formatFirstLetter,
+  farmURL,
+  formatTokenSymbols,
+} from "@utils/farmlistMethods";
 import ShareFarm from "./ShareFarm";
 
 type FarmType = {
@@ -59,29 +63,28 @@ const SpecificFarm = ({ farms, noResult }: FarmType) => {
                     <td className="whitespace-nowrap py-6 pl-4 pr-3 text-sm sm:pl-6 rounded-bl-lg">
                       <div className="flex items-center">
                         <div className="hidden md:flex flex-row items-center justify-center -space-x-2">
-                          <div className="z-0 flex overflow-hidden ring-2 ring-neutral-300 dark:ring-neutral-500 rounded-full bg-white dark:bg-neutral-800">
-                            <Image
-                              src={farm?.asset?.tokens[0]?.logo}
-                              alt={farm?.asset?.tokens[0]?.symbol}
-                              width={36}
-                              height={36}
-                            />
-                          </div>
-                          <div className="z-10 flex overflow-hidden ring-2 ring-neutral-300 dark:ring-neutral-500 rounded-full bg-white dark:bg-neutral-800">
-                            <Image
-                              src={farm?.asset?.tokens[1]?.logo}
-                              alt={farm?.asset?.tokens[1]?.symbol}
-                              width={36}
-                              height={36}
-                            />
-                          </div>
+                          {farm?.asset.logos.map(
+                            (logo: string, index: number) => (
+                              <div
+                                key={index}
+                                className="z-10 flex overflow-hidden ring-2 ring-neutral-300 dark:ring-neutral-500 rounded-full bg-white dark:bg-neutral-800"
+                              >
+                                <Image
+                                  src={logo}
+                                  alt={logo}
+                                  width={36}
+                                  height={36}
+                                />
+                              </div>
+                            )
+                          )}
                         </div>
                         <div className="ml-2 flex flex-col gap-y-0.5">
                           <div className="flex flex-row items-center">
                             <div className="font-semibold tracking-wide">
-                              <span>{farm?.asset?.tokens[0]?.symbol}</span>
-                              {" • "}
-                              <span>{farm?.asset?.tokens[1]?.symbol}</span>
+                              <span>
+                                {formatTokenSymbols(farm?.asset.symbol)}
+                              </span>
                             </div>
                           </div>
                           <div className="text-neutral-500 dark:text-neutral-400 font-medium">
@@ -95,7 +98,7 @@ const SpecificFarm = ({ farms, noResult }: FarmType) => {
                       {toDollarFormat(farm?.tvl)}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100 font-semibold">
-                      {(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}%
+                      {(farm?.apr.base + farm?.apr.reward).toFixed(2)}%
                     </td>
                     <td className="whitespace-nowrap rounded-br-lg py-4 px-7 sm:px-4 text-right text-sm font-medium">
                       <div className="relative flex items-center justify-start lg:justify-center">
@@ -118,9 +121,7 @@ const SpecificFarm = ({ farms, noResult }: FarmType) => {
                         <div className="ml-3 sm:ml-0 w-1/3 text-center">
                           <ShareFarm
                             farm={farm}
-                            apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(
-                              2
-                            )}
+                            apr={(farm?.apr.base + farm?.apr.reward).toFixed(2)}
                           />
                         </div>
                       </div>

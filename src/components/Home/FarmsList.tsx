@@ -70,7 +70,7 @@ const FarmsList = ({ farms }: any) => {
               <div className="ml-3 sm:ml-0 w-1/3 text-center">
                 <ShareFarm
                   farm={farm}
-                  apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}
+                  apr={(farm?.apr.base + farm?.apr.reward).toFixed(2)}
                 />
               </div>
             </div>
