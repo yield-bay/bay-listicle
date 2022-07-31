@@ -16,10 +16,10 @@ export function formatFarmType(farmType: string): string {
   return formatted.concat(" SWAP");
 }
 
-export function formatTokenSymbols(farmName: string): string {
+export function formatTokenSymbols(farmName: string): string[] {
   if (farmName.includes("-")) {
     let tokenNames = farmName.slice(0, -3).split("-");
-    return `${tokenNames[0]} • ${tokenNames[1]}`;
+    return tokenNames;
   }
-  return farmName;
+  return [farmName];
 }
