@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import { isNotificationAtom } from "@store/atoms";
 import Tooltip from "@components/common/Tooltip";
 import { trackEventWithProperty } from "@utils/analytics";
+import { formatFirstLetter } from "@utils/farmlistMethods";
 
 function classNames(classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -14,8 +15,11 @@ export default function ShareFarm({ farm, apr }: any) {
   const [, isNotificationSet] = useAtom(isNotificationAtom);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   let [url, setUrl] = useState<string>("");
+  console.log(farm);
   const tweetUrl =
-    `https://twitter.com/share?text=I%20found%20this%20farm%20with%20${apr}﹪%20APR.%20If%20you're%20looking%20for%20yield%20farms%20in%20the%20dotsama%20ecosystem,%20give%20@yield_bay%20a%20shot.%20` +
+    `https://twitter.com/share?text=I%20found%20this%20farm%20with%20${apr}%25%20APR%20on%20${formatFirstLetter(
+      farm.protocol
+    )}%21%0A%0AWhen%20looking%20for%20yield%20farms%20in%20Dotsama%2C%20%40yield_bay%20is%20the%20place%20to%20go%20%F0%9F%8F%84%F0%9F%8F%96%EF%B8%8F%20%0A%0A%E2%86%92` +
     encodeURIComponent(url);
   const utmLink =
     "&utm_campaign=share-farm&utm_source=yb-list&utm_medium=textlink";
