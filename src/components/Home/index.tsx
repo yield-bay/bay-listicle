@@ -10,13 +10,13 @@ import { trackPageView } from "@utils/analytics";
 import Notification from "@components/common/Notification";
 import { XIcon } from "@heroicons/react/solid";
 import Tooltip from "@components/common/Tooltip";
+import SpecificFarm from "./SpecificFarm";
 
 const Home = () => {
   const router = useRouter();
   const [farms, setFarms] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredFarms, noFilteredFarms] = useFilteredFarms(farms, searchTerm);
-  // Specific Farm state: Have the farm returened from the useSpecificFarm Hook
   const [farmQuery, setFarmQuery] = useState<string | string[] | undefined>("");
   const [idQuery, setIdQuery] = useState<string | string[] | undefined>();
   const specificFarm = useSpecificFarm(farms, farmQuery, idQuery);
@@ -82,7 +82,7 @@ const Home = () => {
                         <XIcon className="w-5 h-5" />
                       </button>
                     </Tooltip>
-                    <p className="text-neutral-900 dark:text-neutral-100 font-medium">
+                    <p className="text-neutral-900 dark:text-neutral-100 text-xs md:text-base font-medium">
                       Showing Yield Farm with address {farmQuery} and pool ID:{" "}
                       {idQuery}
                     </p>
@@ -97,7 +97,7 @@ const Home = () => {
                     noResult={noFilteredFarms}
                   />
                 ) : (
-                  <ListicleTable farms={specificFarm} noResult={false} />
+                  <SpecificFarm farms={specificFarm} noResult={false} />
                 )}
               </div>
             </div>

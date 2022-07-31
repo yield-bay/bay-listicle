@@ -1,36 +1,17 @@
 import Image from "next/image";
 import toDollarFormat from "@utils/toDollarFormat";
 import { trackEventWithProperty } from "@utils/analytics";
-import ShareMenu from "./ShareMenu";
+import { formatFirstLetter, farmURL } from "@utils/farmlistMethods";
+import ShareFarm from "./ShareFarm";
 
 const FarmsList = ({ farms }: any) => {
-  // function formatFarmType(farmType: string): string {
-  //   let formatted = farmType.slice(0, -3).toUpperCase(); // removed Amm and uppercased
-  //   // formatted = formatted.slice(0, 1) + formatted.slice(1).toLowerCase();
-  //   return formatted.concat(" SWAP");
-  // }
-
-  function formatFirstLetter(name: string): string {
-    return name.slice(0, 1).toUpperCase() + name.slice(1);
-  }
-
-  function farmURL(protocol: string): string {
-    if (protocol == "stellaswap")
-      return "https://app.stellaswap.com/farm/?utm_campaign=yieldbay+list&utm_source=list.yieldbay.io";
-    if (protocol == "solarbeam")
-      return "https://app.solarbeam.io/farm/?utm_campaign=yieldbay+list&utm_source=list.yieldbay.io";
-    if (protocol == "beamswap")
-      return "https://app.beamswap.io/farm/?utm_campaign=yieldbay+list&utm_source=list.yieldbay.io";
-    return "";
-  }
-
   return (
     <>
       {farms.map((farm: any) => (
         <tr key={`${farm.asset.address}-${farm.tvl}`}>
-          <td className="whitespace-nowrap py-6 pl-4 pr-3 text-sm sm:pl-6">
+          <td className="whitespace-nowrap py-6 pl-4 pr-3 text-sm sm:pl-6 rounded-bl-lg">
             <div className="flex items-center">
-              <div className="flex md:hidden lg:flex flex-row items-center justify-center -space-x-2">
+              <div className="hidden md:flex flex-row items-center justify-center -space-x-2">
                 <div className="z-0 flex overflow-hidden ring-2 ring-neutral-300 dark:ring-neutral-500 rounded-full bg-white dark:bg-neutral-800">
                   <Image
                     src={farm?.asset?.tokens[0]?.logo}
@@ -74,25 +55,15 @@ const FarmsList = ({ farms }: any) => {
           <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100 font-semibold">
             {(farm?.apr?.base + farm?.apr?.reward).toFixed(2)}%
           </td>
-          <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-            <div className="relative flex justify-start lg:justify-center">
-              {/* Share Icon */}
-              {typeof window !== "undefined" &&
-                window.location.search.length == 0 && ( // not showing share-icon in specific-farm view
-                  <div className="absolute hidden md:block md:right-0 lg:right-1">
-                    <ShareMenu
-                      farm={farm}
-                      apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}
-                    />
-                  </div>
-                )}
+          <td className="whitespace-nowrap py-4 px-7 sm:px-4 text-right text-sm font-medium">
+            <div className="relative flex items-center justify-start lg:justify-center">
               <a
                 href={farmURL(farm?.protocol)}
                 target="_blank"
                 rel="noreferrer"
               >
                 <button
-                  className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-100 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300"
+                  className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300"
                   onClick={() =>
                     trackEventWithProperty("go-to-farm", {
                       protocol: farm?.protocol,
@@ -102,6 +73,12 @@ const FarmsList = ({ farms }: any) => {
                   <p>Go to farm</p>
                 </button>
               </a>
+              <div className="ml-3 sm:ml-0 w-1/3 text-center">
+                <ShareFarm
+                  farm={farm}
+                  apr={(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}
+                />
+              </div>
             </div>
           </td>
         </tr>

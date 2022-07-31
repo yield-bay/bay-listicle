@@ -8,7 +8,7 @@ export function trackPageView() {
   }
 }
 
-export function trackEventWithProperty(event: string, properties: any) {
+export function trackEventWithProperty(event: string, properties?: any) {
   if (typeof window != undefined) {
     amplitude
       .init(process.env.NEXT_PUBLIC_AMPLITUDE_CODE as string)
