@@ -5,6 +5,7 @@ import { formatFirstLetter, farmURL } from "@utils/farmlistMethods";
 import ShareFarm from "./ShareFarm";
 
 const FarmsList = ({ farms }: any) => {
+
   return (
     <>
       {farms.map((farm: any) => (
@@ -53,7 +54,7 @@ const FarmsList = ({ farms }: any) => {
             {toDollarFormat(farm?.tvl)}
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-neutral-900 dark:text-neutral-100 font-semibold">
-            {(farm?.apr?.farm + farm?.apr?.trading).toFixed(2)}%
+            {(farm?.apr?.base + farm?.apr?.reward).toFixed(2)}%
           </td>
           <td className="whitespace-nowrap py-4 px-7 sm:px-4 text-right text-sm font-medium">
             <div className="relative flex items-center justify-start lg:justify-center">

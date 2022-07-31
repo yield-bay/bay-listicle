@@ -38,6 +38,8 @@ export const fetchListicleFarms = async () => {
             apr {
               farm
               trading
+              base
+              reward
             }
             url
           }
