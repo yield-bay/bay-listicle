@@ -11,35 +11,30 @@ export const fetchListicleFarms = async () => {
       gql`
         query Farms {
           farms {
+            id
+            chef
             chain
             protocol
-            farm_type
-            farm_implementation
+            farmType
+            farmImpl
             asset {
+              symbol
               address
-              name
-              tokens {
-                symbol
-                price
-                logo
-              }
+              price
+              logos
             }
-            id
             tvl
             rewards {
-              token {
-                symbol
-                price
-              }
               amount
-              value_usd
+              asset
+              valueUSD
               freq
             }
             apr {
-              farm
-              trading
+              reward
+              base
             }
-            url
+            allocPoint
           }
         }
       `
