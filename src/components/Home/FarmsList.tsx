@@ -5,7 +5,6 @@ import { formatFirstLetter, farmURL } from "@utils/farmlistMethods";
 import ShareFarm from "./ShareFarm";
 
 const FarmsList = ({ farms }: any) => {
-
   return (
     <>
       {farms.map((farm: any) => (
