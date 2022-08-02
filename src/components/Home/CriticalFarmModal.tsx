@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { farmURL } from "@utils/farmlistMethods";
+import { trackEventWithProperty } from "@utils/analytics";
 
 export default function CriticalFarmModal({
   open,
@@ -74,15 +75,28 @@ export default function CriticalFarmModal({
                     </div>
                   </div>
                   <div className="inline-flex w-full justify-evenly">
-                    <button className="px-4 py-2 rounded-md bg-neutral-300 dark:bg-neutral-700">
-                      Read More
-                    </button>
+                    <a
+                      href="https://twitter.com/yield_bay/status/1554413766694952960"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <button className="px-4 py-2 rounded-md bg-neutral-300 dark:bg-neutral-700">
+                        Read More
+                      </button>
+                    </a>
                     <a
                       href={farmURL(protocol)}
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <button className="px-4 py-2 rounded-md bg-neutral-300 dark:bg-neutral-700">
+                      <button
+                        className="px-4 py-2 rounded-md bg-neutral-300 dark:bg-neutral-700"
+                        onClick={() =>
+                          trackEventWithProperty("go-to-farm", {
+                            protocol: protocol,
+                          })
+                        }
+                      >
                         Continue Anyways
                       </button>
                     </a>
