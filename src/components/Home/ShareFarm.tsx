@@ -25,7 +25,7 @@ export default function ShareFarm({ farm, apr }: any) {
         typeof window !== "undefined"
           ? window.location.host // for testing locally
           : "https://list.yieldbay.io"
-      }/?farm=${farm.asset?.address}&id=${farm.id}` + utmLink
+      }/?farm=${farm?.asset?.address}&id=${farm?.id}` + utmLink
     );
   }, [farm]);
 
