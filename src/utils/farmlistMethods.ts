@@ -4,7 +4,8 @@ export function formatFirstLetter(name: string): string {
 
 export function farmURL(protocol: string): string {
   if (protocol == "stellaswap") return "https://app.stellaswap.com/farm";
-  if (protocol == "solarbeam") return "https://app.solarbeam.io/farm";
+  else if (protocol == "solarbeam") return "https://app.solarbeam.io/farm";
+  else if (protocol == "beamswap") return "https://app.beamswap.io/farm";
   return "";
 }
 
