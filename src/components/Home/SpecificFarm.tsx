@@ -84,11 +84,12 @@ const SpecificFarm = ({ farms, noResult }: FarmType) => {
                           <div className="ml-2 flex flex-col gap-y-0.5">
                             <div className="flex flex-row items-center">
                               <div className="font-semibold tracking-wide">
-                                {tokenNames.length > 1 ? (
-                                  <span>{`${tokenNames[0]} • ${tokenNames[1]}`}</span>
-                                ) : (
-                                  <span>{tokenNames[0]}</span>
-                                )}
+                                {tokenNames.map((tokenName, index) => (
+                                  <span key={index} className="mr-[3px]">
+                                    {tokenName}
+                                    {index !== tokenNames.length - 1 && " •"}
+                                  </span>
+                                ))}
                               </div>
                             </div>
                             <div className="text-neutral-500 dark:text-neutral-400 font-medium">

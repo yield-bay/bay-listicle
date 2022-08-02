@@ -30,11 +30,12 @@ const FarmsList = ({ farms }: any) => {
                 <div className="ml-2 flex flex-col gap-y-0.5">
                   <div className="flex flex-row items-center">
                     <div className="font-semibold tracking-wide">
-                      {tokenNames.length > 1 ? (
-                        <span>{`${tokenNames[0]} • ${tokenNames[1]}`}</span>
-                      ) : (
-                        <span>{tokenNames[0]}</span>
-                      )}
+                      {tokenNames.map((tokenName, index) => (
+                        <span key={index} className="mr-[3px]">
+                          {tokenName}
+                          {index !== tokenNames.length - 1 && " •"}
+                        </span>
+                      ))}
                     </div>
                     {/* <div className="ml-2">
                       <span className="tracking-wider items-center rounded bg-primary-50 dark:bg-primary-300 px-2 py-0.5 text-xs font-semibold text-primary-500 dark:text-neutral-900">
