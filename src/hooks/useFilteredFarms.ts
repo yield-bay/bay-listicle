@@ -8,12 +8,17 @@ export default function useFilteredFarms(
   if (search === "") return [farms, false];
   const searchTerm = search.trim().toUpperCase();
   const filtered = farms.filter((farm: any) => {
+    let matchTerm = "";
     const tokenNames = formatTokenSymbols(farm?.asset.symbol);
-    const matchTerm =
-      tokenNames.length > 1
-        ? `${tokenNames[0]}_${tokenNames[1]}_${farm.protocol}_${farm.chain}`.toUpperCase()
-        : `${tokenNames[0]}_${farm.protocol}_${farm.chain}`.toUpperCase();
-    console.log("matchterm", matchTerm);
+
+    tokenNames.forEach((tokenName) => {
+      matchTerm += tokenName + "_";
+    });
+
+    matchTerm = matchTerm
+      .concat(farm?.protocol, "_", farm?.chain)
+      .toUpperCase();
+
     if (matchTerm.indexOf(searchTerm) >= 0) return true;
     return false;
   });
