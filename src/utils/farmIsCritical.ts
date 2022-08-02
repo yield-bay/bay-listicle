@@ -17,11 +17,8 @@ export function isCritical(id: number, protocol: string) {
     return false;
   }
 
-  console.log("protocol id", protocol, id);
-
   const state = criticalFarms.map((farm) => {
     return farm.protocol == protocol && include(farm.ids, id);
   });
-  console.log("state", state.includes(true));
   return state.includes(true);
 }

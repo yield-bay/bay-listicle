@@ -80,7 +80,7 @@ export default function CriticalFarmModal({
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <button className="px-4 py-2 rounded-md bg-neutral-300 dark:bg-neutral-700">
+                      <button className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300">
                         Read More
                       </button>
                     </a>
@@ -90,7 +90,7 @@ export default function CriticalFarmModal({
                       rel="noreferrer"
                     >
                       <button
-                        className="px-4 py-2 rounded-md bg-neutral-300 dark:bg-neutral-700"
+                        className="inline-flex items-center duration-50 rounded bg-red-50 dark:bg-red-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-red-500 dark:text-red-800 active:bg-red-200 hover:ring-2 ring-red-400 dark:hover:bg-red-200 dark:active:bg-red-300"
                         onClick={() =>
                           trackEventWithProperty("go-to-farm", {
                             protocol: protocol,
