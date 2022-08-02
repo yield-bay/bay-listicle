@@ -1,10 +1,16 @@
+import { useState } from "react";
 import Image from "next/image";
 import toDollarFormat from "@utils/toDollarFormat";
 import { trackEventWithProperty } from "@utils/analytics";
 import { formatFirstLetter, farmURL } from "@utils/farmlistMethods";
+import { isCritical } from "@utils/farmIsCritical";
 import ShareFarm from "./ShareFarm";
+import CriticalFarmModal from "./CriticalFarmModal";
 
 const FarmsList = ({ farms }: any) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [thisProtocol, setThisProtocol] = useState("");
+
   return (
     <>
       {farms.map((farm: any) => (
@@ -40,6 +46,11 @@ const FarmsList = ({ farms }: any) => {
                     {/* <span className="tracking-wider items-center rounded bg-primary-50 dark:bg-primary-300 px-2 py-0.5 text-xs font-semibold text-primary-500 dark:text-neutral-900">
                       {formatFarmType(farm?.farm_type)}
                     </span> */}
+                    {isCritical(farm?.id, farm?.protocol) && (
+                      <span className="tracking-wider items-center rounded bg-red-50 dark:bg-red-300 px-2 py-0.5 text-xs font-semibold text-red-500 dark:text-red-800">
+                        warning
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="text-neutral-500 dark:text-neutral-400 font-medium">
@@ -57,22 +68,34 @@ const FarmsList = ({ farms }: any) => {
           </td>
           <td className="whitespace-nowrap py-4 px-7 sm:px-4 text-right text-sm font-medium">
             <div className="relative flex items-center justify-start lg:justify-center">
-              <a
-                href={farmURL(farm?.protocol)}
-                target="_blank"
-                rel="noreferrer"
-              >
+              {isCritical(farm?.id, farm?.protocol) ? (
                 <button
-                  className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300"
-                  onClick={() =>
-                    trackEventWithProperty("go-to-farm", {
-                      protocol: farm?.protocol,
-                    })
-                  }
+                  className="inline-flex items-center duration-50 rounded bg-red-50 dark:bg-red-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-red-500 dark:text-red-800 active:bg-red-200 hover:ring-2 ring-red-400 dark:hover:bg-red-200 dark:active:bg-red-300"
+                  onClick={() => {
+                    setThisProtocol(farm?.protocol);
+                    setModalOpen(true);
+                  }}
                 >
-                  <p>Go to farm</p>
+                  Go to farm
                 </button>
-              </a>
+              ) : (
+                <a
+                  href={farmURL(farm?.protocol)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <button
+                    className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300"
+                    onClick={() =>
+                      trackEventWithProperty("go-to-farm", {
+                        protocol: farm?.protocol,
+                      })
+                    }
+                  >
+                    <p>Go to farm</p>
+                  </button>
+                </a>
+              )}
               <div className="ml-3 sm:ml-0 w-1/3 text-center">
                 <ShareFarm
                   farm={farm}
@@ -83,6 +106,11 @@ const FarmsList = ({ farms }: any) => {
           </td>
         </tr>
       ))}
+      <CriticalFarmModal
+        open={modalOpen}
+        setOpen={setModalOpen}
+        protocol={thisProtocol}
+      />
     </>
   );
 };
