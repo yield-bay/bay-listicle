@@ -1,3 +1,5 @@
+import { formatTokenSymbols } from "../utils/farmlistMethods";
+
 export default function useFilteredFarms(
   farms: any[],
   search: string
@@ -6,8 +8,17 @@ export default function useFilteredFarms(
   if (search === "") return [farms, false];
   const searchTerm = search.trim().toUpperCase();
   const filtered = farms.filter((farm: any) => {
-    const matchTerm =
-      `${farm.asset.tokens[0]?.symbol}_${farm.asset.tokens[1].symbol}_${farm.protocol}_${farm.chain}`.toUpperCase();
+    let matchTerm = "";
+    const tokenNames = formatTokenSymbols(farm?.asset.symbol);
+
+    tokenNames.forEach((tokenName) => {
+      matchTerm += tokenName + "_";
+    });
+
+    matchTerm = matchTerm
+      .concat(farm?.protocol, "_", farm?.chain)
+      .toUpperCase();
+
     if (matchTerm.indexOf(searchTerm) >= 0) return true;
     return false;
   });

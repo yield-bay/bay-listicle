@@ -20,7 +20,7 @@ export default function CriticalFarmModal({
         className="fixed z-10 inset-0 overflow-y-auto"
         onClose={setOpen}
       >
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="flex items-end justify-center min-h-screen pt-4 sm:p-0 text-center sm:block">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -30,7 +30,7 @@ export default function CriticalFarmModal({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-zinc-500 backdrop-blur-sm bg-opacity-60 transition-opacity duration-300" />
+            <Dialog.Overlay className="fixed inset-0 bg-zinc-500 bg-opacity-60 transition-opacity duration-300" />
           </Transition.Child>
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
@@ -47,7 +47,7 @@ export default function CriticalFarmModal({
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="relative inline-block align-bottom bg-white dark:bg-neutral-800 rounded-xl px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-3/4 sm:max-w-sm sm:w-full sm:py-6">
+            <div className="relative inline-block align-bottom bg-white dark:bg-neutral-800 rounded-t-lg sm:rounded-lg px-4 py-5 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full sm:max-w-sm sm:w-full sm:py-6">
               <div className="absolute top-0 right-0 pt-2 pr-2 sm:block">
                 <div className="flex items-center p-1 group rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer">
                   <button
@@ -74,13 +74,13 @@ export default function CriticalFarmModal({
                       Hack.
                     </div>
                   </div>
-                  <div className="inline-flex w-full justify-evenly">
+                  <div className="flex flex-col gap-y-2 sm:flex-row w-full justify-evenly">
                     <a
                       href="https://twitter.com/yield_bay/status/1554413766694952960"
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <button className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300">
+                      <button className="inline-flex items-center justify-center duration-50 w-3/4 sm:w-auto rounded-md bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300">
                         Read More
                       </button>
                     </a>
@@ -90,7 +90,7 @@ export default function CriticalFarmModal({
                       rel="noreferrer"
                     >
                       <button
-                        className="inline-flex items-center duration-50 rounded bg-red-50 dark:bg-red-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-red-500 dark:text-red-800 active:bg-red-200 hover:ring-2 ring-red-400 dark:hover:bg-red-200 dark:active:bg-red-300"
+                        className="inline-flex items-center justify-center duration-50 w-3/4 sm:w-auto rounded-md bg-red-50 dark:bg-red-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-red-500 dark:text-red-800 active:bg-red-200 hover:ring-2 ring-red-400 dark:hover:bg-red-200 dark:active:bg-red-300"
                         onClick={() =>
                           trackEventWithProperty("go-to-farm", {
                             protocol: protocol,
