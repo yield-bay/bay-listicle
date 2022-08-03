@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Image from "next/image";
 import Tooltip from "@components/common/Tooltip";
 import { trackEventWithProperty } from "@utils/analytics";
@@ -6,8 +7,10 @@ import {
   formatFirstLetter,
   farmURL,
   formatTokenSymbols,
+  isCritical,
 } from "@utils/farmlistMethods";
 import ShareFarm from "./ShareFarm";
+import CriticalFarmModal from "./CriticalFarmModal";
 
 type FarmType = {
   farms: any;
@@ -15,6 +18,9 @@ type FarmType = {
 };
 
 const SpecificFarm = ({ farms, noResult }: FarmType) => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [thisProtocol, setThisProtocol] = useState<string>("");
+
   return (
     <div className="flex flex-col">
       <div className="-my-2 -mx-4 overflow-x-auto sm:overflow-visible min-w-full align-middle sm:-mx-6 lg:-mx-8 px-0 lg:px-8 lg:py-4">
@@ -91,6 +97,13 @@ const SpecificFarm = ({ farms, noResult }: FarmType) => {
                                   </span>
                                 ))}
                               </div>
+                              <div className="ml-2">
+                                {isCritical(farm?.id, farm?.protocol) && (
+                                  <span className="tracking-wider items-center rounded bg-red-50 dark:bg-red-300 px-2 py-0.5 text-xs font-semibold text-red-500 dark:text-red-800">
+                                    warning
+                                  </span>
+                                )}
+                              </div>
                             </div>
                             <div className="text-neutral-500 dark:text-neutral-400 font-medium">
                               {formatFirstLetter(farm?.protocol)} on{" "}
@@ -107,7 +120,35 @@ const SpecificFarm = ({ farms, noResult }: FarmType) => {
                       </td>
                       <td className="whitespace-nowrap rounded-br-lg py-4 px-7 sm:px-4 text-right text-sm font-medium">
                         <div className="relative flex items-center justify-start lg:justify-center">
-                          <a
+                          {isCritical(farm?.id, farm?.protocol) ? (
+                            <button
+                              className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300"
+                              onClick={() => {
+                                setThisProtocol(farm?.protocol);
+                                setModalOpen(true);
+                              }}
+                            >
+                              Go to farm
+                            </button>
+                          ) : (
+                            <a
+                              href={farmURL(farm?.protocol)}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <button
+                                className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300"
+                                onClick={() =>
+                                  trackEventWithProperty("go-to-farm", {
+                                    protocol: farm?.protocol,
+                                  })
+                                }
+                              >
+                                <p>Go to farm</p>
+                              </button>
+                            </a>
+                          )}
+                          {/* <a
                             href={farmURL(farm?.protocol)}
                             target="_blank"
                             rel="noreferrer"
@@ -122,7 +163,7 @@ const SpecificFarm = ({ farms, noResult }: FarmType) => {
                             >
                               <p>Go to farm</p>
                             </button>
-                          </a>
+                          </a> */}
                           <div className="ml-3 sm:ml-0 w-1/3 text-center">
                             <ShareFarm
                               farm={farm}
@@ -149,6 +190,11 @@ const SpecificFarm = ({ farms, noResult }: FarmType) => {
           </div>
         )}
       </div>
+      <CriticalFarmModal
+        open={modalOpen}
+        setOpen={setModalOpen}
+        protocol={thisProtocol}
+      />
     </div>
   );
 };

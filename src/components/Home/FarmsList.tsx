@@ -6,14 +6,14 @@ import {
   formatFirstLetter,
   farmURL,
   formatTokenSymbols,
+  isCritical,
 } from "@utils/farmlistMethods";
-import { isCritical } from "@utils/farmIsCritical";
 import ShareFarm from "./ShareFarm";
 import CriticalFarmModal from "./CriticalFarmModal";
 
 const FarmsList = ({ farms }: any) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [thisProtocol, setThisProtocol] = useState("");
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [thisProtocol, setThisProtocol] = useState<string>("");
 
   return (
     <>
