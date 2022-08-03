@@ -24,14 +24,14 @@ export function formatTokenSymbols(farmName: string): string[] {
   return [farmName];
 }
 
-export function isCritical(id: number, protocol: string) {
+export function isCritical(id: number, chef: string) {
   const criticalFarms = [
     {
-      protocol: "stellaswap",
+      chef: "0xF3a5454496E26ac57da879bf3285Fa85DEBF0388",
       ids: [11, 12, 13],
     },
     {
-      protocol: "beamswap",
+      chef: "0xC6ca172FC8BDB803c5e12731109744fb0200587b",
       ids: [15],
     },
   ];
@@ -44,7 +44,8 @@ export function isCritical(id: number, protocol: string) {
   }
 
   const state = criticalFarms.map((farm) => {
-    return farm.protocol == protocol && include(farm.ids, id);
+    return farm.chef == chef && include(farm.ids, id);
   });
+  console.log(id, state.includes(true));
   return state.includes(true);
 }
