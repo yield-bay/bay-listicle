@@ -54,10 +54,10 @@ const ListicleTable = ({ farms, noResult }: ListicleType) => {
     } else if (newSortStatus.key == "yield") {
       sortFn = (a: any, b: any) =>
         newSortStatus.order == Order.ASC
-          ? a.apr.farm + a.apr.trading >= b.apr.farm + b.apr.trading
+          ? a.apr.reward + a.apr.base >= b.apr.reward + b.apr.base
             ? 1
             : -1
-          : a.apr.farm + a.apr.trading < b.apr.farm + b.apr.trading
+          : a.apr.reward + a.apr.base < b.apr.reward + b.apr.base
           ? 1
           : -1;
     }
