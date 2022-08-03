@@ -46,6 +46,5 @@ export function isCritical(id: number, chef: string) {
   const state = criticalFarms.map((farm) => {
     return farm.chef == chef && include(farm.ids, id);
   });
-  console.log(id, state.includes(true));
   return state.includes(true);
 }
