@@ -15,7 +15,6 @@ export default function ShareFarm({ farm, apr }: any) {
   const [, isNotificationSet] = useAtom(isNotificationAtom);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   let [url, setUrl] = useState<string>("");
-  console.log(farm);
   const tweetUrl =
     `https://twitter.com/share?text=I%20found%20this%20farm%20with%20${apr}%25%20APR%20on%20${formatFirstLetter(
       farm.protocol
@@ -29,7 +28,7 @@ export default function ShareFarm({ farm, apr }: any) {
         typeof window !== "undefined"
           ? window.location.host // for testing locally
           : "https://list.yieldbay.io"
-      }/?farm=${farm.asset?.address}&id=${farm.id}` + utmLink
+      }/?farm=${farm?.asset?.address}&id=${farm?.id}` + utmLink
     );
   }, [farm]);
 

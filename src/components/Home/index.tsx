@@ -32,7 +32,7 @@ const Home = () => {
     });
 
     trackPageView();
-  });
+  }, []);
 
   return (
     <div>
