@@ -95,14 +95,15 @@ const ListicleTable = ({ farms, noResult }: ListicleType) => {
                             });
                           }}
                         >
-                          <span>TVL</span>
-                          {/* <QuestionMarkCircleIcon className="w-4 h-5 ml-1 text-neutral-500 dark:text-neutral-400" /> */}
-                          {sortStatus.key == "tvl" &&
-                            (sortStatus.order == Order.DESC ? (
-                              <ArrowNarrowDownIcon className="w-4 h-4 inline -mt-0.5" />
-                            ) : (
-                              <ArrowNarrowUpIcon className="w-4 h-4 inline mb-0.5" />
-                            ))}
+                          <div>
+                            <span>TVL</span>
+                            {sortStatus.key == "tvl" &&
+                              (sortStatus.order == Order.DESC ? (
+                                <ArrowNarrowDownIcon className="w-4 h-4 inline -mt-0.5" />
+                              ) : (
+                                <ArrowNarrowUpIcon className="w-4 h-4 inline mb-0.5" />
+                              ))}
+                          </div>
                         </Tooltip>
                       </div>
                     </th>
@@ -121,14 +122,16 @@ const ListicleTable = ({ farms, noResult }: ListicleType) => {
                           content="The percentage of returns the farm offers on staking for an year."
                           onButtonClick={() => handleSort("yield")}
                         >
-                          <span>Yield</span>
-                          {/* <QuestionMarkCircleIcon className="w-4 h-4 ml-1 text-neutral-500 dark:text-neutral-400" /> */}
-                          {sortStatus.key == "yield" &&
-                            (sortStatus.order == Order.DESC ? (
-                              <ArrowNarrowDownIcon className="w-4 h-4 inline -mt-0.5" />
-                            ) : (
-                              <ArrowNarrowUpIcon className="w-4 h-4 inline mb-0.5" />
-                            ))}
+                          <div>
+                            <span>Yield</span>
+                            {/* <QuestionMarkCircleIcon className="w-4 h-4 ml-1 text-neutral-500 dark:text-neutral-400" /> */}
+                            {sortStatus.key == "yield" &&
+                              (sortStatus.order == Order.DESC ? (
+                                <ArrowNarrowDownIcon className="w-4 h-4 inline -mt-0.5" />
+                              ) : (
+                                <ArrowNarrowUpIcon className="w-4 h-4 inline mb-0.5" />
+                              ))}
+                          </div>
                         </Tooltip>
                       </div>
                     </th>

@@ -74,7 +74,7 @@ const Home = () => {
                   </div>
                 ) : (
                   <div className="inline-flex items-center space-x-2 mt-8">
-                    <Tooltip content="back to all farms" position="top">
+                    <Tooltip content="back to all farms">
                       <button
                         className="w-max h-max rounded-full bg-black text-neutral-600 hover:text-neutral-900 dark:text-neutral-200 hover:dark:text-white dark:bg-white bg-opacity-5 dark:bg-opacity-20 active:bg-opacity-10 dark:active:bg-opacity-[0.15] hover:scale-105 active:scale-100 cursor-default p-1.5 transition-all duration-150"
                         onClick={() => router.push("/")}

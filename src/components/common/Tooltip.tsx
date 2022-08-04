@@ -1,36 +1,31 @@
-import { Tooltip as FBtooltip } from "flowbite-react";
-import { useTheme } from "next-themes";
+import React from "react";
+import Tippy from "@tippyjs/react/headless";
 
 type TooltipProps = {
-  children: React.ReactNode;
+  children: React.ReactElement;
   content: string;
-  position?: "auto" | "bottom" | "right" | "top" | "left";
   onButtonClick?: () => void;
-  className?: string;
 };
 
 export default function Tooltip({
   children,
   content,
-  position,
   onButtonClick,
-  className,
 }: TooltipProps) {
-  const { theme } = useTheme();
-
   return (
-    <div className={className}>
-      <FBtooltip
-        content={content}
-        style={theme == "dark" ? "light" : "dark"}
-        placement={position}
-        trigger="hover"
-        animation="duration-150"
-        arrow={true}
-        onClick={onButtonClick}
-      >
-        {children}
-      </FBtooltip>
-    </div>
+    <Tippy
+      render={(attrs) => (
+        <div
+          className="box text-[15px] font-medium text-white dark:text-neutral-700 px-3 py-1.5 tracking-wide shadow-md rounded-lg max-w-sm bg-black dark:bg-white border border-neutral-700 dark:border-neutral-200"
+          tabIndex={-1}
+          onClick={onButtonClick}
+          {...attrs}
+        >
+          <span>{content}</span>
+        </div>
+      )}
+    >
+      {children}
+    </Tippy>
   );
 }

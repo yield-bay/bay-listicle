@@ -66,10 +66,7 @@ export default function ShareFarm({ farm, apr }: any) {
 const ShareMenu = ({ farm, url, tweetUrl, isNotificationSet }: any) => {
   return (
     <Menu as="div" className="relative hidden sm:inline-block">
-      <Tooltip
-        content="Share Farm link"
-        className="transition-all duration-150"
-      >
+      <Tooltip content="Share Farm link">
         <div className="hover:scale-105 active:scale-100">
           <Menu.Button className="p-2 rounded-md bg-neutral-100 dark:bg-neutral-700 cursor-pointer text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white active:bg-neutral-200 dark:active:bg-neutral-600 transition-all duration-150">
             <ShareIcon className="w-[18px]" />
