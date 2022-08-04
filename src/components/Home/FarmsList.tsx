@@ -10,6 +10,7 @@ import {
 } from "@utils/farmlistMethods";
 import ShareFarm from "./ShareFarm";
 import CriticalFarmModal from "./CriticalFarmModal";
+import Tooltip from "@components/common/Tooltip";
 
 const FarmsList = ({ farms }: any) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -45,9 +46,11 @@ const FarmsList = ({ farms }: any) => {
                     </div>
                     <div className="ml-2">
                       {isCritical(farm?.id, farm?.chef) && (
-                        <span className="tracking-wider items-center rounded bg-red-50 dark:bg-red-300 px-2 py-0.5 text-xs font-semibold text-red-500 dark:text-red-800">
-                          warning
-                        </span>
+                        <Tooltip content="This Yield Farm has been affected by the recent Nomad Hack.">
+                          <span className="tracking-wider items-center rounded bg-red-50 dark:bg-red-300 px-2 py-0.5 text-xs font-semibold text-red-500 dark:text-red-800">
+                            compromised
+                          </span>
+                        </Tooltip>
                       )}
                     </div>
                   </div>
