@@ -17,8 +17,12 @@ export function formatFarmType(farmType: string): string {
 }
 
 export function formatTokenSymbols(farmName: string): string[] {
-  if (farmName.includes("-")) {
-    let tokenNames = farmName.slice(0, -3).split("-");
+  let tokenSymbols = farmName;
+  if (farmName.includes("LP")) {
+    tokenSymbols = tokenSymbols.replace("LP", "");
+  }
+  if (tokenSymbols.includes("-")) {
+    let tokenNames = tokenSymbols.split("-");
     return tokenNames;
   }
   return [farmName];
