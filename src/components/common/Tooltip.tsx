@@ -16,7 +16,7 @@ export default function Tooltip({
     <Tippy
       render={(attrs) => (
         <div
-          className="box text-[15px] font-medium text-white dark:text-neutral-700 px-3 py-1.5 tracking-wide shadow-md rounded-lg max-w-sm bg-black dark:bg-white border border-neutral-700 dark:border-neutral-200"
+          className="box text-sm font-medium text-white dark:text-neutral-700 px-3 py-1.5 tracking-wide shadow-md rounded-lg max-w-sm bg-black dark:bg-white border border-neutral-700 dark:border-neutral-200"
           tabIndex={-1}
           onClick={onButtonClick}
           {...attrs}
