@@ -46,7 +46,10 @@ const FarmsList = ({ farms }: any) => {
                     </div>
                     <div className="ml-2">
                       {isCritical(farm?.id, farm?.chef) && (
-                        <Tooltip content="This Yield Farm has been affected by the recent Nomad Hack.">
+                        <Tooltip
+                          content="This Yield Farm has been affected by the recent Nomad Hack."
+                          type="warning"
+                        >
                           <span className="tracking-wider items-center rounded bg-red-50 dark:bg-red-300 px-2 py-0.5 text-xs font-semibold text-red-500 dark:text-red-800">
                             compromised
                           </span>
