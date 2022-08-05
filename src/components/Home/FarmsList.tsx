@@ -7,6 +7,7 @@ import {
   farmURL,
   formatTokenSymbols,
   isCritical,
+  formatFarmType,
 } from "@utils/farmlistMethods";
 import ShareFarm from "./ShareFarm";
 import CriticalFarmModal from "./CriticalFarmModal";
@@ -45,10 +46,13 @@ const FarmsList = ({ farms }: any) => {
                       ))}
                     </div>
                     <div className="ml-2">
+                      <span className="tracking-[0.08em] items-center rounded bg-primary-50 dark:bg-primary-300 px-2 py-0.5 text-xs font-medium text-primary-500 dark:text-neutral-900">
+                        {formatFarmType(farm?.farmType)}
+                      </span>
                       {isCritical(farm?.id, farm?.chef) && (
                         <Tooltip content="This Yield Farm has been affected by the recent Nomad Hack.">
-                          <span className="tracking-wider items-center rounded bg-red-50 dark:bg-red-300 px-2 py-0.5 text-xs font-semibold text-red-500 dark:text-red-800">
-                            compromised
+                          <span className="ml-2 select-none items-center rounded-full bg-red-400 dark:bg-red-300 px-2 py-0.5 text-sm font-semibold text-white dark:text-red-700">
+                            !
                           </span>
                         </Tooltip>
                       )}
