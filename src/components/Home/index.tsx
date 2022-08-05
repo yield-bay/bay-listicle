@@ -65,12 +65,18 @@ const Home = () => {
                     </span>
                   </span>
                 </p>
+
                 {!idQuery ? (
-                  <div className="max-w-lg mt-8">
+                  <div className="relative pb-10 md:pb-0 max-w-full mt-8">
                     <SearchInputGroup
                       term={searchTerm}
                       setTerm={setSearchTerm}
                     />
+                    <div className="absolute bottom-0 right-0 left-0 md:left-auto w-max">
+                      <p className="text-sm bg-primary-50 dark:bg-primary-800 dark:bg-opacity-50 font-medium text-primary-900 dark:text-white tracking-[0.020em] px-3 py-1.5 rounded-md transition-all duration-200">
+                        Now tracking {farms.length} farms across 4 protocols
+                      </p>
+                    </div>
                   </div>
                 ) : (
                   <div className="inline-flex items-center space-x-2 mt-8">
