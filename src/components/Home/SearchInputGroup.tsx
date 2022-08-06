@@ -24,7 +24,7 @@ export default function SearchInputGroup({ term, setTerm }: SearchInputProps) {
             setTerm(event.target.value);
             trackEventWithProperty("farm-search"); // No proprty as none required
           }}
-          className="block w-full pl-10 py-2 pr-3 font-normal hover:ring-1 focus:ring-1 ring-neutral-300 dark:ring-neutral-600 text-neutral-500 dark:text-neutral-400 bg-neutral-100 border-none outline-none text-sm sm:text-sm md:text-md rounded-md dark:bg-gray-700 transition-all duration-200"
+          className="block w-full pl-10 py-2 pr-3 font-normal focus:ring-1 ring-neutral-300 dark:ring-neutral-500 text-neutral-500 dark:text-neutral-400 bg-neutral-100 border-none outline-none text-sm sm:text-sm md:text-md rounded-md dark:bg-gray-700 transition-all duration-200"
           placeholder="Search by token, chain or protocol name"
         />
       </div>
