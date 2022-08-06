@@ -1,5 +1,6 @@
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { ChevronRightIcon } from "@heroicons/react/outline";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -20,11 +21,12 @@ export default function Header() {
           target="_blank"
           rel="noreferrer"
         >
-          <button className="px-3 py-1.5 sm:px-8 sm:py-2.5 bg-primary-500 hover:bg-primary-600 dark:hover:bg-primary-400 text-white text-sm font-semibold font-heading tracking-[0em] rounded-full active:scale-[0.98] transition duration-150">
+          <button className="inline-flex items-center group sm:gap-x-1 px-3 py-1.5 sm:px-8 sm:py-2.5 bg-primary-500 hover:bg-primary-600 dark:hover:bg-primary-400 text-white text-sm font-semibold font-heading tracking-[0em] rounded-full active:scale-[0.98] transition duration-150">
             list your protocol
+            <ChevronRightIcon className="hidden sm:block h-4 group-hover:translate-x-1 transition duration-150" />
           </button>
         </a>
-        {/* className="flex p-2 h-max bg-white dark:bg-neutral-900 transition-all duration-200 border border-neutral-200 dark:border-neutral-700 rounded-lg hover:shadow-md cursor-pointer ml-auto" */}          
+        {/* className="flex p-2 h-max bg-white dark:bg-neutral-900 transition-all duration-200 border border-neutral-200 dark:border-neutral-700 rounded-lg hover:shadow-md cursor-pointer ml-auto" */}
         <button
           className="flex p-2 h-max transition-all duration-200 cursor-pointer"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
