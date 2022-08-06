@@ -14,25 +14,26 @@ export default function Header() {
         />
         <span>YieldBay</span>
       </div>
-      <div className="inline-flex items-center gap-x-4">
+      <div className="inline-flex items-center gap-x-1 sm:gap-x-4 mr-2">
         <a
           href="https://discord.gg/AKHuvbz7q4"
           target="_blank"
           rel="noreferrer"
         >
-          <button className="px-8 py-2.5 bg-primary-500 hover:bg-primary-600 dark:hover:bg-primary-400 text-white text-sm font-semibold font-heading tracking-[0em] rounded-full active:scale-[0.98] transition duration-150">
+          <button className="px-3 py-1.5 sm:px-8 sm:py-2.5 bg-primary-500 hover:bg-primary-600 dark:hover:bg-primary-400 text-white text-sm font-semibold font-heading tracking-[0em] rounded-full active:scale-[0.98] transition duration-150">
             list your protocol
           </button>
         </a>
+        {/* className="flex p-2 h-max bg-white dark:bg-neutral-900 transition-all duration-200 border border-neutral-200 dark:border-neutral-700 rounded-lg hover:shadow-md cursor-pointer ml-auto" */}          
         <button
-          className="flex p-2 h-max bg-white dark:bg-neutral-900 transition-all duration-200 border border-neutral-200 dark:border-neutral-700 rounded-lg hover:shadow-md cursor-pointer ml-auto"
+          className="flex p-2 h-max transition-all duration-200 cursor-pointer"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           <Image
             src={theme === "dark" ? "/sun.svg" : "/moon.svg"}
             alt="theme toggle"
-            width={20}
-            height={20}
+            width={22}
+            height={22}
           />
         </button>
       </div>
