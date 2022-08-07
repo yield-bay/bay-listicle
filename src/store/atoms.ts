@@ -2,7 +2,7 @@ import { atom } from "jotai";
 
 interface SortStatusType {
   key: string;
-  order: number;
+  order: number | undefined;
 }
 
 export const sortStatusAtom = atom<SortStatusType>({
