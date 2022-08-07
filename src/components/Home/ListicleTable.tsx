@@ -20,25 +20,32 @@ type ListicleType = {
 };
 
 const ListicleTable = ({ farms, noResult }: ListicleType) => {
-  // const [sortStatus, setSortStatus] = useState({
-  //   key: "tvl",
-  //   order: Order.DESC,
-  // });
-  // const [sortedFarms, setSortedFarms] = useState(farms);
-
   const [sortStatus, sortStatusSet] = useAtom(sortStatusAtom);
   const [sortedFarms, sortedFarmsSet] = useAtom(sortedFarmsAtom);
 
   useEffect(() => {
-    if (farms.length > 0) sortedFarmsSet(farms);
+    if (farms.length > 0) handleSort(sortStatus.key, false, sortStatus.order);
   }, [farms, sortedFarmsSet]);
 
-  const handleSort = (key: string) => {
-    let newSortStatus = {
-      key,
-      order: sortStatus.order == Order.ASC ? Order.DESC : Order.ASC, // Flip the order
+  const handleSort = (key: string, toggle: boolean, defaultOrder?: number) => {
+    let newSortStatus: {
+      key: string;
+      order: number | undefined;
     };
-    if (key !== sortStatus.key) newSortStatus.order = Order.DESC; // if the key is not same as before, set the Order to DESC
+
+    if (toggle) {
+      newSortStatus = {
+        key,
+        order: sortStatus.order == Order.ASC ? Order.DESC : Order.ASC, // Flip the order
+      };
+      if (key !== sortStatus.key) newSortStatus.order = Order.DESC; // if the key is not same as before, set the Order to DESC
+    } else {
+      newSortStatus = {
+        key,
+        order: defaultOrder,
+      };
+    }
+
     sortStatusSet(newSortStatus);
 
     let sortFn; // to be used to sort the pools
@@ -83,13 +90,13 @@ const ListicleTable = ({ farms, noResult }: ListicleType) => {
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-medium tracking-wider cursor-pointer"
-                      onClick={() => handleSort("tvl")}
+                      onClick={() => handleSort("tvl", true)}
                     >
                       <div className="flex items-center">
                         <Tooltip
                           content="Total Value Locked. Amount of money currently invested in the farm, denoted in USD."
                           onButtonClick={() => {
-                            handleSort("tvl");
+                            handleSort("tvl", true);
                             trackEventWithProperty("table-sorting", {
                               sortingType: "tvl",
                             });
@@ -111,7 +118,7 @@ const ListicleTable = ({ farms, noResult }: ListicleType) => {
                       scope="col"
                       className="flex px-3 py-3.5 text-left text-sm font-medium tracking-wider cursor-pointer"
                       onClick={() => {
-                        handleSort("yield");
+                        handleSort("yield", true);
                         trackEventWithProperty("table-sorting", {
                           sortingType: "yield",
                         });
@@ -120,7 +127,7 @@ const ListicleTable = ({ farms, noResult }: ListicleType) => {
                       <div className="flex items-center">
                         <Tooltip
                           content="The percentage of returns the farm offers on staking for an year."
-                          onButtonClick={() => handleSort("yield")}
+                          onButtonClick={() => handleSort("yield", true)}
                         >
                           <div>
                             <span>Yield</span>

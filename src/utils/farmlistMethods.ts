@@ -28,7 +28,7 @@ export function formatTokenSymbols(farmName: string): string[] {
   return [farmName];
 }
 
-export function isCritical(id: number, chef: string) {
+export function isCritical(id: number, chef: string): boolean {
   const criticalFarms = [
     {
       chef: "0xF3a5454496E26ac57da879bf3285Fa85DEBF0388",
@@ -40,7 +40,7 @@ export function isCritical(id: number, chef: string) {
     },
   ];
 
-  function include(arr: number[], obj: number) {
+  function include(arr: number[], obj: number): boolean {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i] == obj) return true;
     }
@@ -51,4 +51,8 @@ export function isCritical(id: number, chef: string) {
     return farm.chef == chef && include(farm.ids, id);
   });
   return state.includes(true);
+}
+
+export function protocolCount(farms: any): number {
+  return new Set(farms.map((farm: any) => farm?.protocol)).size;
 }
