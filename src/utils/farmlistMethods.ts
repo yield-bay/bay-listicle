@@ -7,6 +7,7 @@ export function farmURL(protocol: string): string {
   else if (protocol == "solarbeam") return "https://app.solarbeam.io/farm";
   else if (protocol == "beamswap") return "https://app.beamswap.io/farm";
   else if (protocol == "sushi") return "https://app.sushi.com/farm";
+  else if (protocol == "taiga") return "https://app.taigaprotocol.io/";
   return "";
 }
 
