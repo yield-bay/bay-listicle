@@ -46,7 +46,7 @@ export const fetchListicleFarms = async () => {
     console.log(f);
 
     if (f.protocol === "solarbeam") {
-      if (f.id === 42) return false;
+      if (f.id === 42 || f.id === 13) return false;
     }
     if (f.protocol === "stellaswap") {
       if (f.id === 20) return false;
