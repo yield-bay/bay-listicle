@@ -84,11 +84,7 @@ const FarmsList = ({ farms }: any) => {
                     Go to farm
                   </button>
                 ) : (
-                  <a
-                    href={farmURL(farm?.protocol)}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a href={farmURL(farm)} target="_blank" rel="noreferrer">
                     <button
                       className="inline-flex items-center duration-50 rounded bg-primary-50 dark:bg-primary-300 px-5 py-2 transition-all duration-200 hover:shadow-lg font-semibold text-primary-500 dark:text-primary-800 active:bg-primary-200 hover:ring-2 ring-primary-400 dark:hover:bg-primary-200 dark:active:bg-primary-300"
                       onClick={() =>
