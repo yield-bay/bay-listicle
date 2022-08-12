@@ -2,12 +2,14 @@ export function formatFirstLetter(name: string): string {
   return name.slice(0, 1).toUpperCase() + name.slice(1);
 }
 
-export function farmURL(protocol: string): string {
-  if (protocol == "stellaswap") return "https://app.stellaswap.com/farm";
-  else if (protocol == "solarbeam") return "https://app.solarbeam.io/farm";
-  else if (protocol == "beamswap") return "https://app.beamswap.io/farm";
-  else if (protocol == "sushi") return "https://app.sushi.com/farm";
-  else if (protocol == "taiga") return "https://app.taigaprotocol.io/";
+export function farmURL(farm: any): string {
+  if (farm.protocol == "stellaswap") return "https://app.stellaswap.com/farm";
+  else if (farm.protocol == "solarbeam") return "https://app.solarbeam.io/farm";
+  else if (farm.protocol == "beamswap") return "https://app.beamswap.io/farm";
+  else if (farm.protocol == "sushi") return "https://app.sushi.com/farm";
+  else if (farm.protocol == "taiga") {
+    return `https://apps.karura.network/swap/liquidity?lp=sa://${farm.id}`;
+  }
   return "";
 }
 

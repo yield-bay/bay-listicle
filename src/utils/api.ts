@@ -43,8 +43,6 @@ export const fetchListicleFarms = async () => {
 
   const farms = farmObj?.data?.farms;
   const filteredFarms = farms.filter((f: any) => {
-    console.log(f);
-
     if (f.protocol === "solarbeam") {
       if (f.id === 42 || f.id === 13) return false;
     }
