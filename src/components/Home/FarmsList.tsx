@@ -50,7 +50,7 @@ const FarmsList = ({ farms }: any) => {
                         {formatFarmType(farm?.farmType)}
                       </span>
                       {isCritical(farm?.id, farm?.chef) && (
-                        <Tooltip content="This Yield Farm has been affected by the recent Nomad Hack.">
+                        <Tooltip content="This Yield Farm has been affected by a recent hack.">
                           <span className="ml-2 select-none items-center rounded-full bg-red-400 dark:bg-red-300 px-2 py-0.5 text-sm font-semibold text-white dark:text-red-700">
                             !
                           </span>
