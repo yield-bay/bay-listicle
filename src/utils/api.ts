@@ -43,11 +43,22 @@ export const fetchListicleFarms = async () => {
 
   const farms = farmObj?.data?.farms;
   const filteredFarms = farms.filter((f: any) => {
+    // Filter out inactive farms.
+    const solarbeamIds = [13, 42];
+    const beamswapIds = [15, 18, 19];
+    const stellaswapIds = [11, 12, 13];
     if (f.protocol === "solarbeam") {
-      if (f.id === 42 || f.id === 13) return false;
+      if (solarbeamIds.includes(f.id)) return false;
+    }
+    if (f.protocol === "beamswap") {
+      if (beamswapIds.includes(f.id)) return false;
     }
     if (f.protocol === "stellaswap") {
-      if (f.id === 20) return false;
+      if (
+        stellaswapIds.includes(f.id) &&
+        f.chef === "0xF3a5454496E26ac57da879bf3285Fa85DEBF0388"
+      )
+        return false;
     }
     return true;
   });

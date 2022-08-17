@@ -39,7 +39,7 @@ export function isCritical(id: number, chef: string): boolean {
     },
     {
       chef: "0xC6ca172FC8BDB803c5e12731109744fb0200587b",
-      ids: [15],
+      ids: [15, 19, 18],
     },
   ];
 
