@@ -44,7 +44,7 @@ export const fetchListicleFarms = async () => {
   const farms = farmObj?.data?.farms;
   const filteredFarms = farms.filter((f: any) => {
     // Filter out inactive farms.
-    const solarbeamIds = [13, 42];
+    const solarbeamIds = [13];
     const beamswapIds = [15, 18, 19];
     const stellaswapIds = [11, 12, 13];
     if (f.protocol === "solarbeam") {
