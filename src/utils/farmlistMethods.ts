@@ -1,3 +1,5 @@
+import { isObjectType } from "graphql";
+
 export function formatFirstLetter(name: string): string {
   return name.slice(0, 1).toUpperCase() + name.slice(1);
 }
@@ -7,10 +9,13 @@ export function farmURL(farm: any): string {
   else if (farm.protocol == "solarbeam") return "https://app.solarbeam.io/farm";
   else if (farm.protocol == "beamswap") return "https://app.beamswap.io/farm";
   else if (farm.protocol == "sushi") return "https://app.sushi.com/farm";
-  else if (farm.protocol == "taiga") {
+  else if (farm.protocol == "taiga")
     return `https://apps.karura.network/swap/liquidity?lp=sa://${farm.id}`;
-  } else if (farm.protocol == "curve")
+  else if (farm.protocol == "curve")
     return `https://moonbeam.curve.fi/factory/${farm.id}/deposit`;
+  else if (farm.protocol == "zenlink") {
+    return "https://dex.zenlink.pro/#/earn/stake";
+  }
   return "";
 }
 
